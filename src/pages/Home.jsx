@@ -476,13 +476,13 @@ export default function Home() {
                         <div className="circular-container">
                             {/* Center Share Button */}
                             <div className="center-btn" title="Share">
-                                📤
+                                🔗
                             </div>
 
                             {/* Social Icons in Circle */}
                             {socialLinks.map((social, idx) => {
                                 const angle = (idx / socialLinks.length) * 360
-                                const radius = 65
+                                const radius = 75
                                 const x = Math.cos((angle - 90) * Math.PI / 180) * radius
                                 const y = Math.sin((angle - 90) * Math.PI / 180) * radius
 

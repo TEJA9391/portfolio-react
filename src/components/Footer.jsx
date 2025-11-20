@@ -16,7 +16,7 @@ export default function Footer() {
                     <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label} className="social-btn" style={{ animationDelay: `${i * 0.06}s` }}>
                         {s.svg}
                     </a>
-                ))}                ))}
+                ))}               
             </div>
         </footer>
     )
