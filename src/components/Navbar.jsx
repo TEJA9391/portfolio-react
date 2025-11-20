@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import ContactPopup from "./ContactPopup";
+
 
 export default function Navbar({ isDarkMode, setIsDarkMode }) {
     const [isAnimating, setIsAnimating] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [isContactOpen, setIsContactOpen] = useState(false)
 
     const toggleTheme = () => {
         setIsAnimating(true)
@@ -19,17 +22,21 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
         setIsMobileMenuOpen(false)
     }
 
+    const toggleContact = () => {
+        setIsContactOpen(!isContactOpen)
+    }
+
     return (
         <header>
             <div className="nav-wrap">
                 <div className="brand">
                     <span className="logo" aria-hidden="true"></span>
                     <div>
-                        <div className="name">BOORA RAVITEJA</div>
+                        <div className="name">M_e_o_wme</div>
                     </div>
                 </div>
 
-                <button 
+                <button
                     className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
                     onClick={toggleMobileMenu}
                     aria-label="Toggle menu"
@@ -55,7 +62,17 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                             <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>About</NavLink>
                         </li>
                         <li>
-                            <button 
+                            <button
+                                className="contact-btn"
+                                onClick={toggleContact}
+                                title="Contact me"
+                                aria-label="Open contact options"
+                            >
+                                Contact
+                            </button>
+                        </li>
+                        <li>
+                            <button
                                 className={`theme-toggle ${isAnimating ? 'animate' : ''}`}
                                 onClick={toggleTheme}
                                 title={isDarkMode ? 'Light mode' : 'Dark mode'}
@@ -83,6 +100,8 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                     </ul>
                 </nav>
             </div>
+            <ContactPopup open={isContactOpen} onClose={() => setIsContactOpen(false)} isDarkMode={isDarkMode} />
         </header>
     )
 }
+
