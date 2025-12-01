@@ -62,7 +62,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                 <div className="brand">
                     <span className="logo" aria-hidden="true"></span>
                     <div>
-                        <div className="name">M_e_o_wme</div>
+                        <div className="name">T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
+                </button >
 
                 <nav className={`navbar-nav ${isMobileMenuOpen ? 'open' : ''}`}>
                     <ul>
@@ -119,8 +119,8 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div >
             <ContactPopup open={isContactOpen} onClose={() => setIsContactOpen(false)} isDarkMode={isDarkMode} />
-        </header>
+        </header >
     )
 }

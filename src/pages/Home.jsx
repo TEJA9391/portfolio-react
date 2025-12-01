@@ -199,8 +199,19 @@ export default function Home() {
                 <div className="hero-inner">
                     <div className="hero-left fade-in">
                         <div className="headline-wrap">
-                            <h1 className="headline">I am Teja</h1>
+                            <h1 className="headline">
+                                I am
+                                <div className="text-cube">
+                                    <div className="text-cube-inner">
+                                        <div className="text-face front">T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
+                                        <div className="text-face second">Developer</div>
+                                        <div className="text-face third">Student</div>
+                                        <div className="text-face fourth">Creator</div>
+                                    </div>
+                                </div>
+                            </h1>
                         </div>
+
                         <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontWeight: 400 }}>B.Tech AIML Student & Developer</p>
                     </div>
 
@@ -305,8 +316,8 @@ export default function Home() {
                             )}
                         </div>
                     </div>
-                </div>
-            </section>
+                </div >
+            </section >
 
             <main>
                 <section id="about" className="fade-in">
@@ -331,9 +342,9 @@ export default function Home() {
                                 <span className="tag">React</span>
                                 <span className="tag">JavaScript</span>
                                 <span className="tag">Machine Learning</span>
-                                <span className="tag">Flask</span>
+
                                 <span className="tag">SQL</span>
-                                <span className="tag">TensorFlow</span>
+
                             </div>
                         </div>
                     </div>
@@ -350,7 +361,7 @@ export default function Home() {
                             <div key={project.id} className={`proj ${expandedProject === project.id ? 'expanded' : ''}`}>
                                 <h4>{project.title}</h4>
                                 <p style={{ margin: '6px 0 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
-                                
+
                                 {expandedProject === project.id && (
                                     <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(0,0,0,0.1)' }}>
                                         <p style={{ margin: '0 0 8px 0', color: 'var(--text)', fontSize: 14 }}>{project.fullDesc}</p>
@@ -362,16 +373,16 @@ export default function Home() {
                                         </ul>
                                     </div>
                                 )}
-                                
+
                                 <div className="tags" style={{ marginTop: expandedProject === project.id ? 12 : 8 }}>
                                     {project.tags.map((tag, idx) => (
                                         <span key={idx} className="tag">{tag}</span>
                                     ))}
                                 </div>
-                                
+
                                 <div className="buttons" style={{ marginTop: 12 }}>
                                     <a className="btn btn-ghost" href="#" target="_blank">GitHub</a>
-                                    <button 
+                                    <button
                                         className="btn btn-primary"
                                         onClick={() => toggleProject(project.id)}
                                         style={{ cursor: 'pointer' }}
@@ -508,52 +519,54 @@ export default function Home() {
             </main>
 
             {/* Circular Contact Modal */}
-            {isContactOpen && (
-                <>
-                    <div className="contact-overlay" onClick={() => setIsContactOpen(false)}></div>
-                    <div className={`circular-modal ${isContactOpen ? 'open' : ''}`}>
+            {
+                isContactOpen && (
+                    <>
+                        <div className="contact-overlay" onClick={() => setIsContactOpen(false)}></div>
+                        <div className={`circular-modal ${isContactOpen ? 'open' : ''}`}>
 
 
-                        <div className="circular-container">
-                            {/* Center Share Button */}
-                            <div className="center-btn" title="Share">
-                                🔗
-                            </div>
+                            <div className="circular-container">
+                                {/* Center Share Button */}
+                                <div className="center-btn" title="Share">
+                                    🔗
+                                </div>
 
-                            {/* Social Icons in Circle */}
-                            {socialLinks.map((social, idx) => {
-                                const angle = (idx / socialLinks.length) * 360
-                                const radius = 75
-                                const x = Math.cos((angle - 90) * Math.PI / 180) * radius
-                                const y = Math.sin((angle - 90) * Math.PI / 180) * radius
+                                {/* Social Icons in Circle */}
+                                {socialLinks.map((social, idx) => {
+                                    const angle = (idx / socialLinks.length) * 360
+                                    const radius = 75
+                                    const x = Math.cos((angle - 90) * Math.PI / 180) * radius
+                                    const y = Math.sin((angle - 90) * Math.PI / 180) * radius
 
-                                return (
-                                    <a
-                                        key={idx}
-                                        href={social.url}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="circular-item"
-                                        title={social.name}
-                                        style={{
-                                            '--x': `${x}px`,
-                                            '--y': `${y}px`,
-                                            animationDelay: `${idx * 0.08}s`
-                                        }}
-                                    >
-                                        <div
-                                            className="item-icon"
-                                            style={{ background: social.color }}
+                                    return (
+                                        <a
+                                            key={idx}
+                                            href={social.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="circular-item"
+                                            title={social.name}
+                                            style={{
+                                                '--x': `${x}px`,
+                                                '--y': `${y}px`,
+                                                animationDelay: `${idx * 0.08}s`
+                                            }}
                                         >
-                                            {social.icon}
-                                        </div>
-                                    </a>
-                                )
-                            })}
+                                            <div
+                                                className="item-icon"
+                                                style={{ background: social.color }}
+                                            >
+                                                {social.icon}
+                                            </div>
+                                        </a>
+                                    )
+                                })}
+                            </div>
                         </div>
-                    </div>
-                </>
-            )}
+                    </>
+                )
+            }
         </>
     )
 }

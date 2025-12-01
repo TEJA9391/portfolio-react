@@ -53,7 +53,7 @@ export default function App() {
         if (saved) {
             return saved === 'dark'
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches
+        return false // Default to light mode
     })
 
     useEffect(() => {
