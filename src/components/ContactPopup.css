@@ -17,6 +17,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -43,6 +44,57 @@
 }
 
 
+/* Top-right Close Button */
+
+.contact-close-btn-top {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
+        0 0 0 2px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 101;
+}
+
+.contact-circular-menu.light .contact-close-btn-top {
+    background: rgba(43, 43, 43, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+.contact-circular-menu.dark .contact-close-btn-top {
+    background: rgba(26, 26, 26, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5),
+        0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.contact-close-btn-top:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4),
+        0 0 0 3px rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 1);
+}
+
+.contact-close-btn-top:active {
+    transform: scale(0.95) rotate(90deg);
+}
+
+.contact-close-btn-top svg {
+    transition: transform 0.3s ease;
+}
+
+
 /* Center Close Button */
 
 .contact-center-btn {
@@ -51,26 +103,42 @@
     height: 60px;
     border-radius: 50%;
     border: none;
-    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    background: #1a1a1a;
     color: white;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 300;
     cursor: pointer;
     z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 0 3px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
+}
+
+.contact-circular-menu.light .contact-center-btn {
+    background: #2b2b2b;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.contact-circular-menu.dark .contact-center-btn {
+    background: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+        0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .contact-center-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
+        0 0 0 4px rgba(255, 255, 255, 0.2);
+    background: #000;
 }
 
 .contact-center-btn:active {
-    transform: scale(0.95);
+    transform: scale(1.05) rotate(90deg);
 }
 
 
@@ -100,22 +168,22 @@
 
 /* Position each item in a circle using nth-child */
 
-.contact-circular-menu.active .contact-circular-item:nth-child(2) {
+.contact-circular-menu.active .contact-circular-item:nth-child(3) {
     transform: scale(1) rotate(0deg) translateX(120px);
     animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
 }
 
-.contact-circular-menu.active .contact-circular-item:nth-child(3) {
+.contact-circular-menu.active .contact-circular-item:nth-child(4) {
     transform: scale(1) rotate(90deg) translateX(120px);
     animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
 }
 
-.contact-circular-menu.active .contact-circular-item:nth-child(4) {
+.contact-circular-menu.active .contact-circular-item:nth-child(5) {
     transform: scale(1) rotate(180deg) translateX(120px);
     animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
 }
 
-.contact-circular-menu.active .contact-circular-item:nth-child(5) {
+.contact-circular-menu.active .contact-circular-item:nth-child(6) {
     transform: scale(1) rotate(270deg) translateX(120px);
     animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
 }
@@ -125,6 +193,7 @@
         opacity: 0;
         transform: scale(0) rotate(0deg) translateX(0);
     }
+
     100% {
         opacity: 1;
         transform: scale(1) rotate(var(--rotation, 0deg)) translateX(120px);
@@ -167,28 +236,47 @@
         width: 240px;
         height: 240px;
     }
+
     .contact-circular-item {
         width: 60px;
         height: 60px;
     }
+
     .contact-circular-item .icon {
         font-size: 24px;
     }
+
     .contact-center-btn {
         width: 50px;
         height: 50px;
-        font-size: 24px;
+        font-size: 20px;
     }
-    .contact-circular-menu.active .contact-circular-item:nth-child(2) {
+
+    .contact-close-btn-top {
+        width: 35px;
+        height: 35px;
+        top: -10px;
+        right: -10px;
+    }
+
+    .contact-close-btn-top svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .contact-circular-menu.active .contact-circular-item:nth-child(3) {
         transform: scale(1) rotate(0deg) translateX(100px);
     }
-    .contact-circular-menu.active .contact-circular-item:nth-child(3) {
+
+    .contact-circular-menu.active .contact-circular-item:nth-child(4) {
         transform: scale(1) rotate(90deg) translateX(100px);
     }
-    .contact-circular-menu.active .contact-circular-item:nth-child(4) {
+
+    .contact-circular-menu.active .contact-circular-item:nth-child(5) {
         transform: scale(1) rotate(180deg) translateX(100px);
     }
-    .contact-circular-menu.active .contact-circular-item:nth-child(5) {
+
+    .contact-circular-menu.active .contact-circular-item:nth-child(6) {
         transform: scale(1) rotate(270deg) translateX(100px);
     }
 }

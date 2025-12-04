@@ -83,12 +83,13 @@ export default function Home() {
     const projects = [
         {
             id: 1,
-            title: 'Student Aware Study Assistance',
+            title: 'Emotion-Aware Study Assistant',
             shortDesc: 'AI-powered study platform that tracks student engagement and provides personalized learning recommendations using computer vision and ML algorithms.',
-            fullDesc: 'An intelligent study assistance platform that uses computer vision and machine learning to monitor student engagement in real-time. The system analyzes facial expressions, posture, and attention levels to provide personalized recommendations. It tracks study patterns, identifies weak areas, and suggests optimal study schedules for maximum retention.',
-            tags: ['Python', 'TensorFlow', 'OpenCV', 'React'],
-            features: ['Real-time engagement tracking', 'AI-powered study recommendations', 'Personalized learning paths', 'Progress analytics dashboard'],
-            link: '#'
+            fullDesc: 'A Flask-based web application that analyzes emotional state through facial recognition and voice analysis to provide personalized study recommendations. It uses computer vision and machine learning (DeepFace, TensorFlow) to monitor engagement in real-time.',
+            tags: ['Python', 'Flask', 'OpenCV', 'TensorFlow'],
+            features: ['Real-time Emotion Detection', 'Voice Tone Analysis', 'Personalized Study Recommendations', 'Session History Dashboard'],
+            github: 'https://github.com/TEJA9391/emotion-aware-study-assistant',
+            demo: 'https://teja9391.github.io/Emotion-Aware-Study-Assistant/'
         },
         {
             id: 2,
@@ -97,7 +98,8 @@ export default function Home() {
             fullDesc: 'A marketplace platform connecting homeowners with local service professionals for repairs and maintenance. Features include real-time messaging, service provider ratings, booking management, and payment processing. Built with a robust backend and responsive React frontend.',
             tags: ['React', 'Node.js', 'MongoDB', 'Firebase'],
             features: ['Real-time messaging system', 'Provider ratings & reviews', 'Secure payment integration', 'Service booking management', 'GPS-based provider matching'],
-            link: '#'
+            github: 'https://github.com/TEJA9391/FixHub',
+            demo: 'https://fix-eflsmdp7t-tejas-projects-8508e785.vercel.app'
         },
         {
             id: 3,
@@ -106,7 +108,8 @@ export default function Home() {
             fullDesc: 'A sophisticated NLP application that analyzes text sentiment in real-time. Uses pre-trained models to classify emotions and provide detailed sentiment scores. Features include batch processing, visualization of results, and API integration capabilities for external applications.',
             tags: ['Python', 'NLP', 'Flask', 'React'],
             features: ['Real-time sentiment analysis', 'Multi-language support', 'Sentiment visualization charts', 'Batch processing capability', 'REST API for integration'],
-            link: '#'
+            github: '#',
+            demo: '#'
         }
     ]
 
@@ -166,8 +169,6 @@ export default function Home() {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-
         // Validate all fields
         const newErrors = {}
         Object.keys(formData).forEach(key => {
@@ -176,11 +177,10 @@ export default function Home() {
         })
 
         if (Object.keys(newErrors).length === 0) {
-            setSubmitted(true)
-            setFormData({ name: '', email: '', message: '' })
-            setTouched({})
-            setTimeout(() => setSubmitted(false), 5000)
+            // No errors, let the form submit naturally to FormSubmit.co
+            // We don't need to do anything here, the browser will handle the POST request
         } else {
+            e.preventDefault() // Stop submission if there are errors
             setErrors(newErrors)
             setTouched({ name: true, email: true, message: true })
         }
@@ -203,10 +203,10 @@ export default function Home() {
                                 I am
                                 <div className="text-cube">
                                     <div className="text-cube-inner">
-                                        <div className="text-face front">T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
-                                        <div className="text-face second">Developer</div>
-                                        <div className="text-face third">Student</div>
-                                        <div className="text-face fourth">Creator</div>
+                                        <div className="text-face front" style={{ color: 'var(--text)' }}>a T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
+                                        <div className="text-face second">a Developer</div>
+                                        <div className="text-face third">a Student</div>
+                                        <div className="text-face fourth">a Creator</div>
                                     </div>
                                 </div>
                             </h1>
@@ -243,12 +243,14 @@ export default function Home() {
                                         height: rect.height
                                     }
 
-                                    const modalWidth = 160
-                                    const rightOffset = 32
+                                    // Updated for new modal size (280px)
+                                    const modalWidth = 280
+                                    const rightOffset = 42
                                     const targetCenterX = window.innerWidth - rightOffset - modalWidth / 2
-                                    const targetCenterY = rect.top + (rect.height / 2) + window.scrollY
+                                    const targetCenterY = window.innerHeight / 2  // Center vertically
 
-                                    const finalWidth = 42
+                                    // Close button size (50px)
+                                    const finalWidth = 50
                                     const final = {
                                         left: targetCenterX - (finalWidth / 2),
                                         top: targetCenterY - (finalWidth / 2),
@@ -300,10 +302,12 @@ export default function Home() {
                                         justifyContent: 'center',
                                         zIndex: 1900,
                                         borderRadius: 9900,
-                                        background: 'var(--text)',
-                                        color: 'var(--bg)',
-                                        transition: 'all 400ms cubic-bezier(0.22, 1, 0.36, 1)',
-                                        boxShadow: '0 14px 35px rgba(0,0,0,0.18)'
+                                        background: '#ef4444',  // Red background for close button
+                                        color: 'white',
+                                        fontSize: flyStyle.width < 45 ? '16px' : '32px',  // Grow font size as it flies
+                                        fontWeight: 300,
+                                        transition: 'all 500ms cubic-bezier(0.34, 1.56, 0.64, 1)',  // Bouncy animation
+                                        boxShadow: '0 14px 35px rgba(239, 68, 68, 0.3)'
                                     }}
                                     onTransitionEnd={() => {
                                         setIsAnimating(false)
@@ -311,7 +315,7 @@ export default function Home() {
                                         setIsContactOpen(true)
                                     }}
                                 >
-                                    🔗
+                                    ×
                                 </div>
                             )}
                         </div>
@@ -380,8 +384,11 @@ export default function Home() {
                                     ))}
                                 </div>
 
-                                <div className="buttons" style={{ marginTop: 12 }}>
-                                    <a className="btn btn-ghost" href="#" target="_blank">GitHub</a>
+                                <div className="buttons" style={{ marginTop: 12, display: 'flex', gap: 10 }}>
+                                    <a className="btn btn-ghost" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
+                                    {project.demo && project.demo !== '#' && (
+                                        <a className="btn btn-ghost" href={project.demo} target="_blank" rel="noreferrer">Demo</a>
+                                    )}
                                     <button
                                         className="btn btn-primary"
                                         onClick={() => toggleProject(project.id)}
@@ -419,7 +426,17 @@ export default function Home() {
                             </div>
                         )}
 
-                        <form className="contact-grid" onSubmit={handleSubmit}>
+                        <form
+                            className="contact-grid"
+                            action="https://formsubmit.co/tejrtej9347@gmail.com"
+                            method="POST"
+                            onSubmit={handleSubmit}
+                        >
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_template" value="table" />
+                            <input type="hidden" name="_subject" value={`New Contact from Portfolio`} />
+                            <input type="hidden" name="_next" value={window.location.href} />
+
                             <div className="form-control">
                                 <label htmlFor="name">
                                     Name
@@ -527,15 +544,19 @@ export default function Home() {
 
 
                             <div className="circular-container">
-                                {/* Center Share Button */}
-                                <div className="center-btn" title="Share">
-                                    🔗
+                                {/* Center Close Button */}
+                                <div
+                                    className="center-btn"
+                                    onClick={() => setIsContactOpen(false)}
+                                    title="Close"
+                                >
+                                    ×
                                 </div>
 
                                 {/* Social Icons in Circle */}
                                 {socialLinks.map((social, idx) => {
                                     const angle = (idx / socialLinks.length) * 360
-                                    const radius = 75
+                                    const radius = 90  // Increased radius for better spacing
                                     const x = Math.cos((angle - 90) * Math.PI / 180) * radius
                                     const y = Math.sin((angle - 90) * Math.PI / 180) * radius
 
@@ -550,7 +571,7 @@ export default function Home() {
                                             style={{
                                                 '--x': `${x}px`,
                                                 '--y': `${y}px`,
-                                                animationDelay: `${idx * 0.08}s`
+                                                animationDelay: `${idx * 0.06}s`  // Faster stagger
                                             }}
                                         >
                                             <div
