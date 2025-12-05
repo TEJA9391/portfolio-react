@@ -1,6 +1,7 @@
 {
     "name": "tejas-portfolio",
     "version": "1.0.0",
+    "homepage": "https://TEJA9391.github.io/portfolio-react/",
     "private": true,
     "type": "module",
     "scripts": {
@@ -12,6 +13,7 @@
         "deploy": "vite build && gh-pages -d dist"
     },
     "dependencies": {
+        "framer-motion": "^12.23.25",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^5.5.0",
