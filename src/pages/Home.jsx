@@ -376,17 +376,51 @@ export default function Home() {
                                     }}>{project.title}</h4>
                                     <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
 
-                                    {expandedProject === project.id && (
-                                        <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(0,0,0,0.1)' }}>
-                                            <p style={{ margin: '0 0 8px 0', color: 'var(--text)', fontSize: 14 }}>{project.fullDesc}</p>
-                                            <p style={{ margin: '8px 0 6px 0', color: 'var(--muted)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Key Features</p>
+                                    <div style={{
+                                        maxHeight: expandedProject === project.id ? '600px' : '0',
+                                        opacity: expandedProject === project.id ? 1 : 0,
+                                        overflow: 'hidden',
+                                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        marginTop: expandedProject === project.id ? 12 : 0,
+                                        paddingTop: expandedProject === project.id ? 12 : 0,
+                                        borderTop: expandedProject === project.id ? '1px solid rgba(0,0,0,0.1)' : '1px solid transparent'
+                                    }}>
+                                        <div>
+                                            {/* Description - Delay 0.1s */}
+                                            <p style={{
+                                                margin: '0 0 8px 0',
+                                                color: 'var(--text)',
+                                                fontSize: 14,
+                                                opacity: expandedProject === project.id ? 1 : 0,
+                                                transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
+                                                transition: 'all 0.4s ease 0.1s'
+                                            }}>{project.fullDesc}</p>
+
+                                            {/* Header - Delay 0.2s */}
+                                            <p style={{
+                                                margin: '8px 0 6px 0',
+                                                color: 'var(--muted)',
+                                                fontSize: 12,
+                                                fontWeight: 600,
+                                                textTransform: 'uppercase',
+                                                letterSpacing: '0.5px',
+                                                opacity: expandedProject === project.id ? 1 : 0,
+                                                transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
+                                                transition: 'all 0.4s ease 0.2s'
+                                            }}>Key Features</p>
+
                                             <ul style={{ margin: '0 0 12px 0', paddingLeft: 16, color: 'var(--muted)', fontSize: 13 }}>
                                                 {project.features.map((feature, idx) => (
-                                                    <li key={idx} style={{ marginBottom: 4 }}>{feature}</li>
+                                                    <li key={idx} style={{
+                                                        marginBottom: 4,
+                                                        opacity: expandedProject === project.id ? 1 : 0,
+                                                        transform: expandedProject === project.id ? 'translateX(0)' : 'translateX(-5px)',
+                                                        transition: `all 0.3s ease ${0.3 + (idx * 0.1)}s` /* Staggered delay for list items */
+                                                    }}>{feature}</li>
                                                 ))}
                                             </ul>
                                         </div>
-                                    )}
+                                    </div>
 
                                     <div className="tags" style={{ marginTop: expandedProject === project.id ? 12 : 8 }}>
                                         {project.tags.map((tag, idx) => (
