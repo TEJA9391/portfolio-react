@@ -212,7 +212,7 @@ export default function Home() {
                             </h1>
                         </div>
 
-                        <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontWeight: 400 }}>B.Tech AIML Student & Developer</p>
+                        <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontWeight: 400 }}>AI/ML Alchemist & Full-Stack Architect</p>
                     </div>
 
                     <div className="photo-column fade-in delay">
@@ -335,8 +335,8 @@ export default function Home() {
                     <div className="about-grid">
                         <div className="about-left card">
                             <p style={{ margin: '0 0 8px 0', color: 'var(--muted)' }}>Role</p>
-                            <h4 style={{ margin: '0 0 10px 0' }}>B.Tech AIML Student</h4>
-                            <p style={{ margin: 0, color: 'var(--muted)' }}>I combine AI/ML expertise with full-stack development to create intelligent, user-centric applications. Passionate about solving real-world problems through technology.</p>
+                            <h4 style={{ margin: '0 0 10px 0' }}>Neural Architect & Code Craftsman</h4>
+                            <p style={{ margin: 0, color: 'var(--muted)' }}>Forging the convergence of artificial intelligence and full-stack mastery to architect next-generation intelligent systems. Transforming complex challenges into elegant, ML-powered solutions.</p>
                         </div>
 
                         <div className="about-right card">
