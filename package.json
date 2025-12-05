@@ -1,7 +1,7 @@
 {
     "name": "tejas-portfolio",
     "version": "1.0.0",
-    "homepage": "https://TEJA9391.github.io/portfolio-react/",
+    "homepage": "https://TEJA9391.github.io/portfolio/",
     "private": true,
     "type": "module",
     "scripts": {
