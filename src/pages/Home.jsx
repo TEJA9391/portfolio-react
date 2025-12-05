@@ -222,7 +222,7 @@ export default function Home() {
                     </div>
 
                     <div className="hero-right fade-in">
-                        <p className="desc">B.Tech AI/ML student passionate about building intelligent solutions <br /> and full-stack web applications. Experienced in React, Python, and machine learning.</p>
+                        <p className="desc">Domain Expansion: Infinite Full-Stack Development. <br /> Manifesting intelligent solutions through React, Python, and the infinite potential of ML.</p>
 
                         <div style={{ marginTop: 12, display: 'flex', gap: 10, justifyContent: 'flex-start' }}>
                             <a className="btn btn-ghost" href="/resume.pdf" download title="Download Resume">📄 Resume</a>
