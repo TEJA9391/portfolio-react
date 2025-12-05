@@ -434,8 +434,9 @@ export default function Home() {
                         >
                             <input type="hidden" name="_captcha" value="false" />
                             <input type="hidden" name="_template" value="table" />
-                            <input type="hidden" name="_subject" value={`New Contact from Portfolio`} />
-                            <input type="hidden" name="_next" value={window.location.href} />
+                            <input type="hidden" name="_subject" value="New Contact from Portfolio - tejrtej9347@gmail.com" />
+                            <input type="hidden" name="_next" value="https://teja9391.github.io/portfolio-react/" />
+                            <input type="hidden" name="_autoresponse" value="Thank you for contacting me! I'll get back to you soon." />
 
                             <div className="form-control">
                                 <label htmlFor="name">
