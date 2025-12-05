@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import TejImg from '../assets/tej.jpg'
+import EmotionStudyImg from '../assets/emotion-study.png'
+import FixHubImg from '../assets/fixhub.png'
+import SentimentImg from '../assets/sentiment.png'
 import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaYoutube, FaFacebook } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 
@@ -75,7 +78,8 @@ export default function Home() {
             tags: ['Python', 'Flask', 'OpenCV', 'TensorFlow'],
             features: ['Real-time Emotion Detection', 'Voice Tone Analysis', 'Personalized Study Recommendations', 'Session History Dashboard'],
             github: 'https://github.com/TEJA9391/emotion-aware-study-assistant',
-            demo: 'https://teja9391.github.io/Emotion-Aware-Study-Assistant/'
+            demo: 'https://teja9391.github.io/Emotion-Aware-Study-Assistant/',
+            image: EmotionStudyImg
         },
         {
             id: 2,
@@ -85,7 +89,8 @@ export default function Home() {
             tags: ['React', 'Node.js', 'MongoDB', 'Firebase'],
             features: ['Real-time messaging system', 'Provider ratings & reviews', 'Secure payment integration', 'Service booking management', 'GPS-based provider matching'],
             github: 'https://github.com/TEJA9391/FixHub',
-            demo: 'https://fix-eflsmdp7t-tejas-projects-8508e785.vercel.app'
+            demo: 'https://fix-eflsmdp7t-tejas-projects-8508e785.vercel.app',
+            image: FixHubImg
         },
         {
             id: 3,
@@ -95,7 +100,8 @@ export default function Home() {
             tags: ['Python', 'NLP', 'Flask', 'React'],
             features: ['Real-time sentiment analysis', 'Multi-language support', 'Sentiment visualization charts', 'Batch processing capability', 'REST API for integration'],
             github: '#',
-            demo: '#'
+            demo: '#',
+            image: SentimentImg
         }
     ]
 
@@ -348,40 +354,59 @@ export default function Home() {
 
                     <div className="projects-grid">
                         {projects.map((project) => (
-                            <div key={project.id} className={`proj ${expandedProject === project.id ? 'expanded' : ''}`}>
-                                <h4>{project.title}</h4>
-                                <p style={{ margin: '6px 0 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
-
-                                {expandedProject === project.id && (
-                                    <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(0,0,0,0.1)' }}>
-                                        <p style={{ margin: '0 0 8px 0', color: 'var(--text)', fontSize: 14 }}>{project.fullDesc}</p>
-                                        <p style={{ margin: '8px 0 6px 0', color: 'var(--muted)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Key Features</p>
-                                        <ul style={{ margin: '0 0 12px 0', paddingLeft: 16, color: 'var(--muted)', fontSize: 13 }}>
-                                            {project.features.map((feature, idx) => (
-                                                <li key={idx} style={{ marginBottom: 4 }}>{feature}</li>
-                                            ))}
-                                        </ul>
+                            <div key={project.id} className={`proj ${expandedProject === project.id ? 'expanded' : ''}`} style={{ padding: 0, overflow: 'hidden', transform: expandedProject === project.id ? 'scale(0.98)' : 'scale(1)', transition: 'transform 0.3s ease' }}>
+                                {project.image && (
+                                    <div style={{ width: '100%', height: expandedProject === project.id ? '400px' : '200px', overflow: 'hidden', transition: 'height 0.3s ease' }}>
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
+                                            onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                                            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                                        />
                                     </div>
                                 )}
+                                <div style={{ padding: '16px' }}>
+                                    <h4 style={{
+                                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05))',
+                                        padding: '8px 12px',
+                                        borderRadius: '6px',
+                                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                                        marginBottom: '12px'
+                                    }}>{project.title}</h4>
+                                    <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
 
-                                <div className="tags" style={{ marginTop: expandedProject === project.id ? 12 : 8 }}>
-                                    {project.tags.map((tag, idx) => (
-                                        <span key={idx} className="tag">{tag}</span>
-                                    ))}
-                                </div>
-
-                                <div className="buttons" style={{ marginTop: 12, display: 'flex', gap: 10 }}>
-                                    <a className="btn btn-ghost" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
-                                    {project.demo && project.demo !== '#' && (
-                                        <a className="btn btn-ghost" href={project.demo} target="_blank" rel="noreferrer">Demo</a>
+                                    {expandedProject === project.id && (
+                                        <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(0,0,0,0.1)' }}>
+                                            <p style={{ margin: '0 0 8px 0', color: 'var(--text)', fontSize: 14 }}>{project.fullDesc}</p>
+                                            <p style={{ margin: '8px 0 6px 0', color: 'var(--muted)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Key Features</p>
+                                            <ul style={{ margin: '0 0 12px 0', paddingLeft: 16, color: 'var(--muted)', fontSize: 13 }}>
+                                                {project.features.map((feature, idx) => (
+                                                    <li key={idx} style={{ marginBottom: 4 }}>{feature}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
                                     )}
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={() => toggleProject(project.id)}
-                                        style={{ cursor: 'pointer' }}
-                                    >
-                                        {expandedProject === project.id ? 'Show less' : 'Learn more'}
-                                    </button>
+
+                                    <div className="tags" style={{ marginTop: expandedProject === project.id ? 12 : 8 }}>
+                                        {project.tags.map((tag, idx) => (
+                                            <span key={idx} className="tag">{tag}</span>
+                                        ))}
+                                    </div>
+
+                                    <div className="buttons" style={{ marginTop: 12, display: 'flex', gap: 10 }}>
+                                        <a className="btn btn-ghost" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
+                                        {project.demo && project.demo !== '#' && (
+                                            <a className="btn btn-ghost" href={project.demo} target="_blank" rel="noreferrer">Demo</a>
+                                        )}
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={() => toggleProject(project.id)}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            {expandedProject === project.id ? 'Show less' : 'Learn more'}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ))}
