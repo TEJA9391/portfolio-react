@@ -4,6 +4,7 @@ import TejImg from '../assets/tej.jpg'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
 import SentimentImg from '../assets/sentiment.png'
+import ResumePDF from '../assets/BOORA RAVITEJA.pdf'
 import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaYoutube, FaFacebook } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 
@@ -230,7 +231,7 @@ export default function Home() {
                         <p className="desc">Domain Expansion: Infinite Full-Stack Development. <br /> Manifesting intelligent solutions through React, Python, and the infinite potential of ML.</p>
 
                         <div style={{ marginTop: 12, display: 'flex', gap: 10, justifyContent: 'flex-start' }}>
-                            <a className="btn btn-ghost" href="/resume.pdf" download title="Download Resume">📄 Resume</a>
+                            <a className="btn btn-ghost" href={ResumePDF} download="BOORA_RAVITEJA_Resume.pdf" title="Download Resume">📄 Resume</a>
                             <button
                                 ref={contactBtnRef}
                                 className="btn btn-primary"
