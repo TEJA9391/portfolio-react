@@ -230,7 +230,6 @@ export default function Home() {
                         <p className="desc">Domain Expansion: Infinite Full-Stack Development. <br /> Manifesting intelligent solutions through React, Python, and the infinite potential of ML.</p>
 
                         <div style={{ marginTop: 12, display: 'flex', gap: 10, justifyContent: 'flex-start' }}>
-                            <a className="btn btn-ghost" href="/portfolio-react/BOORA RAVITEJA.pdf" download="BOORA RAVITEJA.pdf" title="Download Resume">📄 Resume</a>
                             <button
                                 ref={contactBtnRef}
                                 className="btn btn-primary"
