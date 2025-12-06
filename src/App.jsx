@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import ScrollToTop from './components/ScrollToTop'
+import BackToTop from './components/BackToTop'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import AboutPage from './pages/About'
@@ -17,6 +17,18 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+
+        // Update page title based on route
+        const pageTitles = {
+            '/': 'BOORA RAVITEJA - AI/ML Developer & Full-Stack Architect',
+            '/about': 'About - BOORA RAVITEJA',
+            '/blog': 'Events - BOORA RAVITEJA',
+            '/speaking': 'Speaking - BOORA RAVITEJA',
+            '/contact': 'Contact - BOORA RAVITEJA',
+            '/student-aware': 'Student Aware - BOORA RAVITEJA'
+        }
+
+        document.title = pageTitles[location.pathname] || 'BOORA RAVITEJA - Portfolio'
     }, [location.pathname])
 
     useEffect(() => {
@@ -29,7 +41,7 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
     return (
         <>
             <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-            <ScrollToTop />
+            <BackToTop />
 
             <Routes>
                 <Route path="/" element={<Home />} />

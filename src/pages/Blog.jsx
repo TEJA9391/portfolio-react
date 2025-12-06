@@ -17,11 +17,18 @@ export default function Blog() {
     const [expandedPost, setExpandedPost] = useState(null)
     const [selectedImage, setSelectedImage] = useState(null)
     const [visibleGalleries, setVisibleGalleries] = useState({})
+    const [searchQuery, setSearchQuery] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('All')
+    const [sortOrder, setSortOrder] = useState('newest')
+
 
     const posts = [
         {
             title: 'AI & LLMs Meetup at IIITH: Key Insights',
             date: 'March 15, 2025',
+            category: 'Meetup',
+            dateValue: new Date('2025-03-15'),
+            keywords: ['AI', 'LLM', 'Machine Learning', 'IIITH', 'Swecha', 'Hugging Face', 'NLP', 'Transformers', 'Deep Learning', 'Neural Networks'],
             excerpt: 'Had an amazing time at the AI & LLMs meetup at International Institute of Information Technology Hyderabad (IIITH), organized by Swecha!',
             images: [meetup1, meetup2, meetup3],
             fullContent: `Had an amazing time at the AI & LLMs meetup at International Institute of Information Technology Hyderabad (IIITH), organized by Swecha! The discussions around Large Language Models (LLMs) and Hugging Face tools were incredibly insightful, covering real-world applications, model fine-tuning, and ethical AI practices.
@@ -46,6 +53,9 @@ Excited to explore more and apply these insights in real-world AI applications. 
         {
             title: 'BITS Pilani Workshop & Hackathon Experience',
             date: 'March 20, 2025',
+            category: 'Workshop',
+            dateValue: new Date('2025-03-20'),
+            keywords: ['BITS Pilani', 'Hackathon', 'Workshop', 'Coding', 'Competition', 'Innovation', 'Problem Solving', 'Collaboration', 'Tech'],
             excerpt: 'Exciting Experience at the BITS Pilani, Campus Workshop & Hackathon! Had an amazing time participating in the Workshop & Hackathon at BITS Pilani College!',
             images: [bits1, bits2, bits3],
             fullContent: `Exciting Experience at the BITS Pilani, Campus Workshop & Hackathon!
@@ -74,6 +84,9 @@ Looking forward to more such events in the future and continuing to build innova
         {
             title: 'SDC AI Summit at Microsoft',
             date: 'March 10, 2025',
+            category: 'Conference',
+            dateValue: new Date('2025-03-10'),
+            keywords: ['Microsoft', 'AI Summit', 'SDC', 'Cloud', 'Azure', 'Artificial Intelligence', 'Tech Conference', 'Networking', 'Innovation'],
             excerpt: 'Had an amazing experience at the SDC AI Summit at Microsoft. Great discussions, networking, and insights on the latest in AI.',
             images: [sdc1, sdc2, sdc3],
             fullContent: `Had an amazing experience at the SDC AI Summit at Microsoft!
@@ -100,6 +113,9 @@ Excited for more such inspiring events in the future and continuing to explore t
         {
             title: 'DevDays Hyderabad - AI/ML Edition',
             date: 'March 2025',
+            category: 'Conference',
+            dateValue: new Date('2025-03-01'),
+            keywords: ['DevDays', 'Hyderabad', 'AI', 'ML', 'Tool Calls', 'LLM', 'Agents', 'Developer Conference', 'Tech Talk'],
             excerpt: 'Had an amazing time at DevDays Hyderabad - AI/ML Edition! Explored "Building Smarter Agents - The Power of Tool Calls in AI".',
             images: [devdays1, devdays2, devdays3],
             fullContent: `Had an amazing time at DevDays Hyderabad - AI/ML Edition (March 2025)!
@@ -136,20 +152,138 @@ Particularly in Large Language Models (LLMs) and their ability to integrate tool
         )
     }
 
+    // Filter and search logic
+    const filteredPosts = posts
+        .filter(post => {
+            // Enhanced search: title, excerpt, full content, and keywords
+            const query = searchQuery.toLowerCase()
+            const matchesSearch = post.title.toLowerCase().includes(query) ||
+                post.excerpt.toLowerCase().includes(query) ||
+                post.fullContent.toLowerCase().includes(query) ||
+                post.keywords.some(keyword => keyword.toLowerCase().includes(query))
+            const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory
+            return matchesSearch && matchesCategory
+        })
+        .sort((a, b) => {
+            if (sortOrder === 'newest') {
+                return b.dateValue - a.dateValue
+            }
+            return a.dateValue - b.dateValue
+        })
+
+    const categories = ['All', ...new Set(posts.map(post => post.category))]
+
     return (
         <main className="blog-container">
             <section className="fade-in">
-                <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 10 }}>Blog</h1>
-                <p style={{ color: 'var(--muted)', marginBottom: 30 }}>Thoughts on AI, web development, and building cool projects</p>
+                <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 10 }}>Events</h1>
+                <p style={{ color: 'var(--muted)', marginBottom: 20 }}>My journey through tech events, meetups, and conferences</p>
+
+                {/* Search and Filter Controls */}
+                <div style={{ marginBottom: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
+                    {/* Search Bar */}
+                    <input
+                        type="text"
+                        placeholder="🔍 Search events..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        style={{
+                            padding: '12px 16px',
+                            borderRadius: '8px',
+                            border: '1px solid rgba(0, 0, 0, 0.1)',
+                            background: 'var(--card-bg)',
+                            color: 'var(--text)',
+                            fontSize: '14px',
+                            outline: 'none',
+                            transition: 'all 0.3s ease'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
+                        onBlur={(e) => e.target.style.borderColor = 'rgba(0, 0, 0, 0.1)'}
+                    />
+
+                    {/* Category Filters and Sort */}
+                    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                            {categories.map((category) => (
+                                <button
+                                    key={category}
+                                    onClick={() => setSelectedCategory(category)}
+                                    style={{
+                                        padding: '8px 16px',
+                                        borderRadius: '20px',
+                                        border: 'none',
+                                        background: selectedCategory === category ? '#3b82f6' : 'rgba(59, 130, 246, 0.1)',
+                                        color: selectedCategory === category ? 'white' : 'var(--text)',
+                                        fontSize: '13px',
+                                        fontWeight: 500,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        if (selectedCategory !== category) {
+                                            e.target.style.background = 'rgba(59, 130, 246, 0.2)'
+                                        }
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        if (selectedCategory !== category) {
+                                            e.target.style.background = 'rgba(59, 130, 246, 0.1)'
+                                        }
+                                    }}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Sort Dropdown */}
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            style={{
+                                padding: '8px 12px',
+                                borderRadius: '8px',
+                                border: '1px solid rgba(0, 0, 0, 0.1)',
+                                background: 'var(--card-bg)',
+                                color: 'var(--text)',
+                                fontSize: '13px',
+                                cursor: 'pointer',
+                                outline: 'none'
+                            }}
+                        >
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+
+                    {/* Results count */}
+                    <p style={{ color: 'var(--muted)', fontSize: '13px', margin: 0 }}>
+                        Showing {filteredPosts.length} of {posts.length} events
+                    </p>
+                </div>
 
                 <div style={{ display: 'grid', gap: 24 }}>
-                    {posts.map((post, idx) => (
+                    {filteredPosts.map((post, idx) => (
                         <div
                             key={idx}
                             className="blog-card"
                             style={{ animationDelay: `${idx * 0.15}s` }}
                         >
-                            <h3 className="blog-title">{post.title}</h3>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                                <h3 className="blog-title" style={{ margin: 0 }}>{post.title}</h3>
+                                <span style={{
+                                    padding: '4px 12px',
+                                    borderRadius: '12px',
+                                    background: 'rgba(59, 130, 246, 0.15)',
+                                    color: '#3b82f6',
+                                    fontSize: '11px',
+                                    fontWeight: 600,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.5px',
+                                    whiteSpace: 'nowrap'
+                                }}>
+                                    {post.category}
+                                </span>
+                            </div>
                             <p className="blog-date">{post.date}</p>
 
                             {/* Image Gallery Toggle & Display */}

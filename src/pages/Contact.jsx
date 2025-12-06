@@ -108,8 +108,8 @@ export default function Contact() {
             {isOpen && (
                 <>
                     <div className="contact-overlay" onClick={() => setIsOpen(false)}></div>
-                   <div id="contact-circle" className={`circular-modal ${isOpen ? 'open' : ''}`}>
-                       
+                    <div id="contact-circle" className={`circular-modal ${isOpen ? 'open' : ''}`}>
+
 
                         <div className="circular-container">
                             {/* Center Share Button */}
@@ -138,12 +138,12 @@ export default function Contact() {
                                             animationDelay: `${idx * 0.08}s`
                                         }}
                                     >
-                                        <div 
-                                                className="item-icon"
-                                                style={{ background: social.color }}
-                                            >
-                                                {social.icon}
-                                            </div>
+                                        <div
+                                            className="item-icon"
+                                            style={{ background: social.color }}
+                                        >
+                                            {social.icon}
+                                        </div>
                                     </a>
                                 )
                             })}

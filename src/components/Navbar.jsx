@@ -62,7 +62,11 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                 <div className="brand">
                     <span className="logo" aria-hidden="true"></span>
                     <div>
-                        <div className="name">T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
+                        <div className="name">
+                            <span style={{ color: 'var(--text)' }}>BOORA </span>
+                            <span style={{ color: '#3b82f6' }}>RAVI</span>
+                            <span style={{ color: 'var(--text)' }}>TEJA</span>
+                        </div>
                     </div>
                 </div>
 
@@ -83,7 +87,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                             <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Blog</NavLink>
+                            <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Events</NavLink>
                         </li>
                         <li>
                             <NavLink to="/speaking" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Speaking</NavLink>

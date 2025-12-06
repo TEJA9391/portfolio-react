@@ -106,7 +106,20 @@ export default function Home() {
     ]
 
     const toggleProject = (id) => {
+        const isExpanding = expandedProject !== id
         setExpandedProject(expandedProject === id ? null : id)
+
+        // Scroll to the card when expanding
+        if (isExpanding) {
+            setTimeout(() => {
+                const element = document.getElementById(`project-${id}`)
+                if (element) {
+                    const yOffset = -100 // Offset from top (adjust for navbar)
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+                }
+            }, 100) // Small delay to let the expansion start
+        }
     }
 
     const validateField = (name, value) => {
@@ -195,10 +208,10 @@ export default function Home() {
                                 I am
                                 <div className="text-cube">
                                     <div className="text-cube-inner">
-                                        <div className="text-face front" style={{ color: 'var(--text)' }}>a T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
-                                        <div className="text-face second">a Developer</div>
-                                        <div className="text-face third">a Student</div>
-                                        <div className="text-face fourth">a Creator</div>
+                                        <div className="text-face front" style={{ color: 'var(--text)' }}> T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
+                                        <div className="text-face second"> Developer</div>
+                                        <div className="text-face third"> Student</div>
+                                        <div className="text-face fourth"> Creator</div>
                                     </div>
                                 </div>
                             </h1>
@@ -332,15 +345,21 @@ export default function Home() {
                         </div>
 
                         <div className="about-right card">
-                            <p style={{ margin: '0 0 8px 0', color: 'var(--muted)' }}>Skills & Interests</p>
-                            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 8 }}>
+                            <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>Skills & Technologies</p>
+                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                                 <span className="tag">Python</span>
-                                <span className="tag">React</span>
                                 <span className="tag">JavaScript</span>
-                                <span className="tag">Machine Learning</span>
-
+                                <span className="tag">React</span>
+                                <span className="tag">Flask</span>
+                                <span className="tag">TensorFlow</span>
+                                <span className="tag">Git & GitHub</span>
+                                <span className="tag">VS Code</span>
+                                <span className="tag">Antigravity</span>
+                                <span className="tag">MongoDB</span>
                                 <span className="tag">SQL</span>
-
+                                <span className="tag">OpenCV</span>
+                                <span className="tag">Model Training</span>
+                                <span className="tag">Classification Models</span>
                             </div>
                         </div>
                     </div>
@@ -354,9 +373,18 @@ export default function Home() {
 
                     <div className="projects-grid">
                         {projects.map((project) => (
-                            <div key={project.id} className={`proj ${expandedProject === project.id ? 'expanded' : ''}`} style={{ padding: 0, overflow: 'hidden', transform: expandedProject === project.id ? 'scale(0.98)' : 'scale(1)', transition: 'transform 0.3s ease' }}>
+                            <div
+                                id={`project-${project.id}`}
+                                key={project.id}
+                                className={`proj ${expandedProject === project.id ? 'expanded' : ''}`}
+                                style={{
+                                    padding: 0,
+                                    overflow: 'hidden',
+                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+                                }}
+                            >
                                 {project.image && (
-                                    <div style={{ width: '100%', height: expandedProject === project.id ? '400px' : '200px', overflow: 'hidden', transition: 'height 0.3s ease' }}>
+                                    <div style={{ width: '100%', height: expandedProject === project.id ? '300px' : '160px', overflow: 'hidden', transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1)', position: 'relative' }}>
                                         <img
                                             src={project.image}
                                             alt={project.title}
@@ -364,6 +392,16 @@ export default function Home() {
                                             onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
                                             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                                         />
+                                        {/* Fade-out gradient overlay */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            height: '60%',
+                                            background: 'linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 70%, var(--card-bg) 100%)',
+                                            pointerEvents: 'none'
+                                        }}></div>
                                     </div>
                                 )}
                                 <div style={{ padding: '16px' }}>
@@ -377,45 +415,49 @@ export default function Home() {
                                     <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
 
                                     <div style={{
-                                        maxHeight: expandedProject === project.id ? '600px' : '0',
+                                        maxHeight: expandedProject === project.id ? '800px' : '0',
                                         opacity: expandedProject === project.id ? 1 : 0,
                                         overflow: 'hidden',
-                                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                                        marginTop: expandedProject === project.id ? 12 : 0,
-                                        paddingTop: expandedProject === project.id ? 12 : 0,
-                                        borderTop: expandedProject === project.id ? '1px solid rgba(0,0,0,0.1)' : '1px solid transparent'
+                                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        marginTop: expandedProject === project.id ? 16 : 0,
+                                        paddingTop: expandedProject === project.id ? 16 : 0,
+                                        paddingBottom: expandedProject === project.id ? 8 : 0,
+                                        paddingLeft: expandedProject === project.id ? 12 : 0,
+                                        paddingRight: expandedProject === project.id ? 12 : 0,
+                                        borderLeft: expandedProject === project.id ? '3px solid #3b82f6' : '3px solid transparent',
+                                        background: expandedProject === project.id ? 'rgba(59, 130, 246, 0.03)' : 'transparent',
+                                        borderRadius: '8px'
                                     }}>
                                         <div>
-                                            {/* Description - Delay 0.1s */}
+                                            {/* Description */}
+                                            <p style={{
+                                                margin: '0 0 16px 0',
+                                                color: 'var(--text)',
+                                                fontSize: 14,
+                                                lineHeight: 1.6,
+                                                opacity: expandedProject === project.id ? 1 : 0,
+                                                transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
+                                                transition: 'all 0.3s ease 0.1s'
+                                            }}>{project.fullDesc}</p>
+
+                                            {/* Key Features Header */}
                                             <p style={{
                                                 margin: '0 0 8px 0',
                                                 color: 'var(--text)',
-                                                fontSize: 14,
-                                                opacity: expandedProject === project.id ? 1 : 0,
-                                                transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
-                                                transition: 'all 0.4s ease 0.1s'
-                                            }}>{project.fullDesc}</p>
-
-                                            {/* Header - Delay 0.2s */}
-                                            <p style={{
-                                                margin: '8px 0 6px 0',
-                                                color: 'var(--muted)',
-                                                fontSize: 12,
+                                                fontSize: 13,
                                                 fontWeight: 600,
-                                                textTransform: 'uppercase',
-                                                letterSpacing: '0.5px',
                                                 opacity: expandedProject === project.id ? 1 : 0,
                                                 transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
-                                                transition: 'all 0.4s ease 0.2s'
-                                            }}>Key Features</p>
+                                                transition: 'all 0.3s ease 0.15s'
+                                            }}>✨ Key Features</p>
 
-                                            <ul style={{ margin: '0 0 12px 0', paddingLeft: 16, color: 'var(--muted)', fontSize: 13 }}>
+                                            <ul style={{ margin: '0', paddingLeft: 20, color: 'var(--muted)', fontSize: 13, lineHeight: 1.8 }}>
                                                 {project.features.map((feature, idx) => (
                                                     <li key={idx} style={{
-                                                        marginBottom: 4,
+                                                        marginBottom: 6,
                                                         opacity: expandedProject === project.id ? 1 : 0,
                                                         transform: expandedProject === project.id ? 'translateX(0)' : 'translateX(-5px)',
-                                                        transition: `all 0.3s ease ${0.3 + (idx * 0.1)}s` /* Staggered delay for list items */
+                                                        transition: `all 0.25s ease ${0.2 + (idx * 0.05)}s`
                                                     }}>{feature}</li>
                                                 ))}
                                             </ul>
