@@ -96,14 +96,28 @@ header.scrolled .brand .name {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #3b82f6 1%, #1e40af 100%);
+    background: linear-gradient(45deg, #ffffff, #60a5fa, #3b82f6, #1e40af, #111111, #3b82f6, #ffffff);
+    background-size: 400% 400%;
+    animation: flowingColors 8s linear infinite;
     display: inline-block;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+@keyframes flowingColors {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
 [data-theme="dark"] .logo {
-    background: linear-gradient(135deg, #60a5fa 1%, #3b82f6 100%);
+    background: linear-gradient(45deg, #e8eaed, #60a5fa, #3b82f6, #1e40af, #0f1419, #60a5fa, #e8eaed);
+    background-size: 400% 400%;
+    animation: flowingColors 8s linear infinite;
     box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
 }
 
