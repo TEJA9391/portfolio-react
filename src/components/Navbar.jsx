@@ -60,7 +60,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
         <header>
             <div className="nav-wrap">
                 <div className="brand">
-                    <span className="logo" aria-hidden="true"></span>
+                    <span className="color-ring" aria-hidden="true"></span>
                     <div>
                         <div className="name">
                             <span style={{ color: 'var(--text)' }}>BOORA </span>

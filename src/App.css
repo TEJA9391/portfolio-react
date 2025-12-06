@@ -1,0 +1,131 @@
+/* Small App specific styles - Add as needed */
+
+/* Animated Color Ring */
+@keyframes colorFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 400% 50%;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.color-ring {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg,
+            #ffffff,
+            #60a5fa,
+            #3b82f6,
+            #1e40af,
+            #111111,
+            #3b82f6,
+            #ffffff);
+    background-size: 400% 400%;
+    animation: colorFlow 8s linear infinite, rotate 4s linear infinite;
+    position: relative;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.color-ring::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--bg);
+    z-index: 1;
+}
+
+@keyframes navLinkPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes navUnderline {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 16px
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--muted);
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 1px;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a.active {
+    font-weight: 700;
+    color: var(--accent);
+    animation: navLinkPulse 0.4s ease-out;
+}
+
+nav a.active::after {
+    width: 100%;
+    background: var(--accent);
+    animation: navUnderline 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* keep global body font-size reasonable */
+
+body {
+    font-size: 15px
+}
+
+
+/* Page container */
+
+.page {
+    padding: 28px
+}
