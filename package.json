@@ -1,7 +1,7 @@
 {
     "name": "tejas-portfolio",
     "version": "1.0.0",
-    "homepage": "https://TEJA9391.github.io/portfolio-react/",
+    "homepage": "https://teja9391.github.io/portfolio-react/",
     "private": true,
     "type": "module",
     "scripts": {
@@ -10,7 +10,7 @@
         "build": "npx vite build",
         "preview": "vite preview",
         "test": "vitest",
-        "deploy": "vite build && gh-pages -d dist"
+        "deploy": "vite build && gh-pages -d dist --no-history"
     },
     "dependencies": {
         "framer-motion": "^12.23.25",
