@@ -754,23 +754,6 @@ body.modal-open * {
     box-shadow: 0 2px 12px rgba(59, 130, 246, 0.4);
 }
 
-/* Smooth hover pulse animation */
-@keyframes buttonPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-
-    50% {
-        box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 0 4px rgba(59, 130, 246, 0.15);
-    }
-}
-
-.btn-primary:hover {
-    animation: buttonPulse 2s ease-in-out infinite;
-}
-
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
