@@ -122,6 +122,90 @@ portfolio-react/
 └── package.json            # Dependencies
 ```
 
+## 📄 Pages & Components
+
+### Pages
+
+#### Home (`/`)
+The landing page featuring:
+- **Hero Section**: Interactive 3D text cube animation showcasing roles (Developer, Designer, Creator, Innovator)
+- **Photo Section**: Profile photo with glassmorphism effects
+- **Projects Showcase**: Expandable project cards with:
+  - Emotion-Aware Study Assistant (AI/ML)
+  - FixHub (Full-Stack Marketplace)
+  - Sentiment Analysis Web App (NLP)
+- **Contact Form**: Quick contact section
+- **Fly-In Animation**: Contact button animates to center before modal opens
+
+#### About (`/about`)
+Comprehensive profile page with:
+- **Introduction**: AI/ML Alchemist & Full-Stack Architect bio
+- **Education**: B.Tech in AI & Machine Learning details
+- **Technical Arsenal**: 
+  - AI/ML & Data Science tools (Python, TensorFlow, PyTorch, OpenCV)
+  - Frontend Development stack (React, JavaScript, HTML/CSS)
+  - Backend & Database tech (Flask, Node.js, MongoDB, SQL)
+  - Tools & Platforms (Git, Vercel, Hugging Face)
+- **Featured Projects**: Detailed project descriptions
+- **Community & Events**: Conference and meetup participation
+- **Personal Philosophy**: What drives the work
+
+#### Blog/Events (`/blog`)
+Dynamic events page with:
+- **Advanced Search**: Search across titles, content, and keywords
+- **Category Filtering**: Filter by Meetup, Workshop, Conference
+- **Sort Options**: Newest first or oldest first
+- **Event Cards**: Each featuring:
+  - Event title and category badge
+  - Date and location
+  - Expandable content (Read More/Less)
+  - Image galleries with fullscreen view
+- **Events Covered**:
+  - AI & LLMs Meetup at IIITH
+  - BITS Pilani Workshop & Hackathon
+  - SDC AI Summit at Microsoft
+  - DevDays Hyderabad - AI/ML Edition
+
+#### Speaking (`/speaking`)
+Speaking engagements page showing:
+- Conference talks and presentations
+- Workshop sessions
+- Event details (title, venue, date)
+- Call-to-action for speaking opportunities
+
+#### Contact (`/contact`)
+Interactive contact page with:
+- **Circular Contact Modal**: Animated social icons in a circle
+- **Social Links**:
+  - WhatsApp
+  - Gmail
+  - LinkedIn
+  - GitHub
+  - Instagram
+  - Twitter
+- **Smooth Animations**: Icons appear with staggered timing
+- **Centered on Mobile**: Optimized positioning for all devices
+
+### Components
+
+#### Navbar
+- Responsive navigation with logo
+- Route links (Home, About, Blog, Speaking, Contact)
+- Dark/Light theme toggle
+- Mobile hamburger menu
+- Smooth scroll behavior
+
+#### Footer
+- Copyright information
+- Social media links
+- Additional navigation
+- Responsive layout
+
+#### Layout
+- Consistent page wrapper
+- Theme management
+- Global navigation structure
+
 ## 🎨 Key Features Deep Dive
 
 ### Responsive Design
