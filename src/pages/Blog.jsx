@@ -25,9 +25,9 @@ export default function Blog() {
     const posts = [
         {
             title: 'AI & LLMs Meetup at IIITH: Key Insights',
-            date: 'March 15, 2025',
+            date: 'March 30, 2025',
             category: 'Meetup',
-            dateValue: new Date('2025-03-15'),
+            dateValue: new Date('2025-03-30'),
             keywords: ['AI', 'LLM', 'Machine Learning', 'IIITH', 'Swecha', 'Hugging Face', 'NLP', 'Transformers', 'Deep Learning', 'Neural Networks'],
             excerpt: 'Had an amazing time at the AI & LLMs meetup at International Institute of Information Technology Hyderabad (IIITH), organized by Swecha!',
             images: [meetup1, meetup2, meetup3],
@@ -52,9 +52,9 @@ Excited to explore more and apply these insights in real-world AI applications. 
         },
         {
             title: 'BITS Pilani Workshop & Hackathon Experience',
-            date: 'March 20, 2025',
+            date: 'March 22, 2025',
             category: 'Workshop',
-            dateValue: new Date('2025-03-20'),
+            dateValue: new Date('2025-03-22'),
             keywords: ['BITS Pilani', 'Hackathon', 'Workshop', 'Coding', 'Competition', 'Innovation', 'Problem Solving', 'Collaboration', 'Tech'],
             excerpt: 'Exciting Experience at the BITS Pilani, Campus Workshop & Hackathon! Had an amazing time participating in the Workshop & Hackathon at BITS Pilani College!',
             images: [bits1, bits2, bits3],
@@ -83,9 +83,9 @@ Looking forward to more such events in the future and continuing to build innova
         },
         {
             title: 'SDC AI Summit at Microsoft',
-            date: 'March 10, 2025',
+            date: 'March 15, 2025',
             category: 'Conference',
-            dateValue: new Date('2025-03-10'),
+            dateValue: new Date('2025-03-15'),
             keywords: ['Microsoft', 'AI Summit', 'SDC', 'Cloud', 'Azure', 'Artificial Intelligence', 'Tech Conference', 'Networking', 'Innovation'],
             excerpt: 'Had an amazing experience at the SDC AI Summit at Microsoft. Great discussions, networking, and insights on the latest in AI.',
             images: [sdc1, sdc2, sdc3],
@@ -112,7 +112,7 @@ Excited for more such inspiring events in the future and continuing to explore t
         },
         {
             title: 'DevDays Hyderabad - AI/ML Edition',
-            date: 'March 2025',
+            date: 'March 01, 2025',
             category: 'Conference',
             dateValue: new Date('2025-03-01'),
             keywords: ['DevDays', 'Hyderabad', 'AI', 'ML', 'Tool Calls', 'LLM', 'Agents', 'Developer Conference', 'Tech Talk'],
