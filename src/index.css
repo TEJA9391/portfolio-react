@@ -1003,8 +1003,8 @@ footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 16px;
-        padding: 24px
+        gap: 20px;
+        padding: 32px 20px
     }
 
     .hero-left {
@@ -1022,11 +1022,13 @@ footer {
     }
 
     .headline {
-        font-size: 34px
+        font-size: 36px;
+        margin: 12px 0 20px 0
     }
 
     .projects-grid {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px
     }
 
     .contact-grid {
@@ -1049,41 +1051,229 @@ footer {
         right: -30%;
         bottom: -10%
     }
+
+    main {
+        padding: 24px 16px
+    }
+
+    section {
+        margin: 24px 0
+    }
 }
 
-@media (max-width:560px) {
-    nav ul {
-        gap: 12px;
-        font-size: 13px
+@media (max-width:768px) {
+
+    /* Hero Section Optimization */
+    .hero {
+        padding: 36px 16px
     }
 
-    .headline {
-        font-size: 28px
+    .hero-inner {
+        gap: 24px;
+        padding: 20px
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr
+    .hero-right {
+        padding: 0 12px
     }
 
-    .photo-wrapper {
-        width: 150px;
-        height: 150px
+    .desc {
+        font-size: 14px;
+        line-height: 1.6
     }
 
-    .photo-wrapper::before {
+    /* Improve button layout on mobile */
+    .hero-right>div[style*="gap: 10"] {
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        flex-wrap: wrap
+    }
+
+    .btn {
+        min-width: 120px;
+        padding: 10px 20px;
+        font-size: 14px
+    }
+
+    /* Circular Modal Mobile Positioning */
+    .circular-modal {
+        top: 50%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        width: 240px;
+        height: 240px
+    }
+
+    .circular-container {
         width: 220px;
         height: 220px
     }
 
+    .circular-item {
+        width: 44px;
+        height: 44px
+    }
+
+    .item-icon {
+        width: 36px;
+        height: 36px
+    }
+
+    .item-icon svg {
+        width: 18px;
+        height: 18px
+    }
+
+    .center-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 28px
+    }
+
+    /* Contact Section */
+    /* Hero Adjustments */
+    .headline {
+        font-size: 28px;
+        letter-spacing: -0.5px
+    }
+
+    .hero {
+        padding: 24px 12px
+    }
+
+    .hero-inner {
+        padding: 16px;
+        gap: 20px
+    }
+
+    /* Photo Sizing */
+    .photo-wrapper {
+        width: 140px;
+        height: 140px
+    }
+
+    .photo-wrapper::before {
+        width: 200px;
+        height: 200px
+    }
+
     .photo-wrapper::after {
-        width: 110px;
-        height: 110px;
+        width: 100px;
+        height: 100px;
         right: -25%;
         bottom: -8%
     }
 
-    .nav-wrap {
-        padding: 10px 14px
+    /* Smaller Buttons */
+    .btn {
+        min-width: 100px;
+        padding: 10px 16px;
+        font-size: 13px
+    }
+
+    .btn-ghost,
+    .btn-primary {
+        font-size: 13px
+    }
+
+    /* Contact Modal Mobile - Centered */
+    .circular-modal {
+        top: 50%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px
+    }
+
+    .circular-container {
+        width: 180px;
+        height: 180px
+    }
+
+    .circular-item {
+        width: 38px;
+        height: 38px
+    }
+
+    .item-icon {
+        width: 32px;
+        height: 32px
+    }
+
+    .item-icon svg {
+        width: 16px;
+        height: 16px
+    }
+
+    .center-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 24px
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: 36px 12px
+    }
+
+    .contact-title {
+        font-size: 28px
+    }
+
+    .contact-description {
+        font-size: 14px
+    }
+
+    .btn-resume,
+    .btn-contact {
+        padding: 12px 24px;
+        font-size: 14px
+    }
+
+    /* Projects */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 14px
+    }
+
+    .proj.expanded {
+        grid-column: span 1
+    }
+
+    /* Form Elements */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 14px;
+        padding: 10px 12px
+    }
+
+    /* Sections */
+    main {
+        padding: 16px 12px
+    }
+
+    section {
+        margin: 20px 0
+    }
+
+    section h3 {
+        font-size: 18px
+    }
+
+    .card {
+        padding: 14px
+    }
+
+    /* Back to Top */
+    .scroll-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px
     }
 }
 
@@ -1320,30 +1510,42 @@ footer {
 
 @media (max-width: 768px) {
     .contact-title {
-        font-size: 36px;
+        font-size: 32px;
+        margin-bottom: 20px;
+        line-height: 1.2
     }
 
     .contact-description {
         font-size: 15px;
-        margin-bottom: 32px;
+        margin-bottom: 28px;
+        line-height: 1.5;
+        padding: 0 8px
     }
 
     .contact-actions {
-        flex-direction: column;
+        flex-direction: row;
         gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap
     }
 
     .btn-resume,
     .btn-contact {
-        width: 100%;
-        justify-content: center;
+        flex: 1;
+        min-width: 140px;
+        max-width: 180px;
+        justify-content: center
     }
 
     .contact-info {
         grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 40px;
-        padding-top: 40px;
+        gap: 14px;
+        margin-top: 32px;
+        padding-top: 32px
+    }
+
+    .contact-item {
+        padding: 16px
     }
 }
 
@@ -2072,5 +2274,38 @@ footer {
 @media (max-width: 768px) {
     .proj:not(.expanded) img {
         padding: 15px;
+    }
+
+    /* Force circular modal to center on mobile */
+    .circular-modal {
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 240px !important;
+        height: 240px !important;
+    }
+
+    .circular-container {
+        width: 220px !important;
+        height: 220px !important;
+    }
+}
+
+@media (max-width: 560px) {
+
+    /* Force circular modal to center on small phones */
+    .circular-modal {
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    .circular-container {
+        width: 180px !important;
+        height: 180px !important;
     }
 }
