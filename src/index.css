@@ -432,7 +432,8 @@ nav a {
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.photo-wrapper:hover {
+/* Hover effect moved to .photo:hover with parent selector */
+.photo-wrapper:has(.photo:hover) {
     transform: translateY(-10px) scale(1.01);
     box-shadow: 0 34px 90px rgba(2, 6, 23, 0.18), 0 6px 18px rgba(2, 6, 23, 0.06);
 }
@@ -498,7 +499,7 @@ nav a {
     transition: transform 0.35s cubic-bezier(.2, .9, .2, 1), box-shadow 0.25s ease;
 }
 
-.photo-wrapper:hover .photo {
+.photo:hover {
     transform: scale(1.02);
 }
 
