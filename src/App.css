@@ -27,16 +27,17 @@
     border-radius: 50%;
     background: linear-gradient(45deg,
             #ffffff,
-            #60a5fa,
-            #3b82f6,
+            #8f4eff,
+            #0062ff,
             #1e40af,
-            #111111,
-            #3b82f6,
+            #000000,
+            #4e00d4,
+            #669ef9,
             #ffffff);
     background-size: 400% 400%;
     animation: colorFlow 8s linear infinite, rotate 4s linear infinite;
     position: relative;
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(11, 87, 208, 0.901);
 }
 
 .color-ring::before {

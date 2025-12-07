@@ -384,7 +384,7 @@ export default function Home() {
                                 }}
                             >
                                 {project.image && (
-                                    <div style={{ width: '100%', height: expandedProject === project.id ? '300px' : '160px', overflow: 'hidden', transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1)', position: 'relative' }}>
+                                    <div style={{ width: '100%', height: expandedProject === project.id ? '300px' : '160px', overflow: 'hidden', transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1)', position: 'relative' }} className="project-image-wrapper">
                                         <img
                                             src={project.image}
                                             alt={project.title}
@@ -392,6 +392,42 @@ export default function Home() {
                                             onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
                                             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                                         />
+                                        {/* Not Available overlay for projects without code */}
+                                        {project.github === '#' && project.demo === '#' && (
+                                            <div className="not-available-overlay" style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                right: 0,
+                                                bottom: 0,
+                                                background: 'rgba(0, 0, 0, 0.75)',
+                                                backdropFilter: 'blur(8px)',
+                                                WebkitBackdropFilter: 'blur(8px)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                opacity: 0,
+                                                transition: 'opacity 0.3s ease',
+                                                pointerEvents: 'none',
+                                                zIndex: 10
+                                            }}>
+                                                <div style={{
+                                                    color: '#fff',
+                                                    fontSize: '18px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'center',
+                                                    padding: '20px',
+                                                    background: 'rgba(239, 68, 68, 0.2)',
+                                                    border: '2px solid rgba(239, 68, 68, 0.5)',
+                                                    borderRadius: '12px',
+                                                    backdropFilter: 'blur(10px)',
+                                                    WebkitBackdropFilter: 'blur(10px)',
+                                                    boxShadow: '0 8px 32px rgba(239, 68, 68, 0.3)'
+                                                }}>
+                                                    🚫 Not Available
+                                                </div>
+                                            </div>
+                                        )}
                                         {/* Fade-out gradient overlay */}
                                         <div style={{
                                             position: 'absolute',

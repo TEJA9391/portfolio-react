@@ -606,6 +606,11 @@ section {
     gap: 10px
 }
 
+/* Not Available overlay hover effect */
+.proj:hover .not-available-overlay {
+    opacity: 1 !important;
+}
+
 .btn {
     padding: 8px 12px;
     border-radius: 8px;
