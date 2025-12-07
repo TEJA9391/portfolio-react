@@ -248,14 +248,12 @@ export default function Home() {
                                         height: rect.height
                                     }
 
-                                    // Updated for new modal size (280px)
-                                    const modalWidth = 280
-                                    const rightOffset = 42
-                                    const targetCenterX = window.innerWidth - rightOffset - modalWidth / 2
-                                    const targetCenterY = window.innerHeight / 2  // Center vertically
+                                    // Fly to true center of screen where ring opens
+                                    const targetCenterX = window.innerWidth / 2
+                                    const targetCenterY = window.innerHeight / 2
 
-                                    // Close button size (50px)
-                                    const finalWidth = 50
+                                    // Close button size (60px to match ring center)
+                                    const finalWidth = 60
                                     const final = {
                                         left: targetCenterX - (finalWidth / 2),
                                         top: targetCenterY - (finalWidth / 2),
@@ -307,12 +305,12 @@ export default function Home() {
                                         justifyContent: 'center',
                                         zIndex: 1900,
                                         borderRadius: 9900,
-                                        background: '#ef4444',  // Red background for close button
+                                        background: '#1a1a1a',  // Match center button
                                         color: 'white',
-                                        fontSize: flyStyle.width < 45 ? '16px' : '32px',  // Grow font size as it flies
+                                        fontSize: flyStyle.width < 50 ? '20px' : '28px',
                                         fontWeight: 300,
-                                        transition: 'all 500ms cubic-bezier(0.34, 1.56, 0.64, 1)',  // Bouncy animation
-                                        boxShadow: '0 14px 35px rgba(239, 68, 68, 0.3)'
+                                        transition: 'all 600ms cubic-bezier(0.34, 1.56, 0.64, 1)',  // Smooth bouncy animation
+                                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.1)'
                                     }}
                                     onTransitionEnd={() => {
                                         setIsAnimating(false)
