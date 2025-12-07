@@ -38,10 +38,52 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
         }
     }, [isScrolled])
 
-    const toggleTheme = () => {
-        setIsAnimating(true)
-        setIsDarkMode(!isDarkMode)
-        setTimeout(() => setIsAnimating(false), 600)
+    const toggleTheme = async (event) => {
+        // Check if browser supports View Transition API
+        if (!document.startViewTransition) {
+            // Fallback for browsers without support
+            setIsAnimating(true)
+            setIsDarkMode(!isDarkMode)
+            setTimeout(() => setIsAnimating(false), 600)
+            return
+        }
+
+        // Get the click position for the circular reveal
+        const x = event.clientX
+        const y = event.clientY
+
+        // Calculate the radius needed to cover the entire viewport
+        const endRadius = Math.hypot(
+            Math.max(x, window.innerWidth - x),
+            Math.max(y, window.innerHeight - y)
+        )
+
+        // Start the view transition
+        const transition = document.startViewTransition(async () => {
+            setIsAnimating(true)
+            setIsDarkMode(!isDarkMode)
+        })
+
+        // Wait for the transition to be ready, then animate
+        await transition.ready
+
+        // Animate the circular reveal
+        document.documentElement.animate(
+            {
+                clipPath: [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`
+                ]
+            },
+            {
+                duration: 800,
+                easing: 'ease-in-out',
+                pseudoElement: '::view-transition-new(root)'
+            }
+        )
+
+        await transition.finished
+        setIsAnimating(false)
     }
 
     const toggleMobileMenu = () => {
