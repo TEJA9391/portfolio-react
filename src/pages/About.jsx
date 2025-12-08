@@ -17,18 +17,38 @@ export default function AboutPage() {
                 </div>
 
                 <div className="card" style={{ marginBottom: 20 }}>
-                    <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>Education & Learning Journey</h2>
-                    <p style={{ lineHeight: 1.8, color: 'var(--muted)' }}>
-                        <strong style={{ color: 'var(--text)' }}>B.Tech in Artificial Intelligence & Machine Learning</strong><br />
-                        Currently pursuing my undergraduate degree with a strong focus on:
-                    </p>
-                    <ul style={{ lineHeight: 1.8, color: 'var(--muted)', paddingLeft: 20, marginTop: 8 }}>
-                        <li>Deep Learning & Neural Network Architectures</li>
-                        <li>Computer Vision & Image Processing</li>
-                        <li>Natural Language Processing & LLMs</li>
-                        <li>Data Science & Statistical Analysis</li>
-                        <li>Full-Stack Web Development</li>
-                    </ul>
+                    <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 16 }}>Education Journey</h2>
+
+                    <div style={{ display: 'grid', gap: '24px' }}>
+                        {/* B.Tech */}
+                        <div style={{ paddingLeft: '16px', borderLeft: '3px solid #3b82f6' }}>
+                            <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Bachelor of Technology (B.Tech)</h3>
+                            <div style={{ color: 'var(--text)', fontSize: 15, fontWeight: 500, marginBottom: 2 }}>Malla Reddy College of Engineering and Technology</div>
+                            <div style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 8 }}>Artificial Intelligence & Machine Learning</div>
+                            <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
+                                Currently pursuing undergraduate degree with specialization in:
+                            </p>
+                            <ul style={{ fontSize: 14, color: 'var(--muted)', paddingLeft: 16, marginTop: 4, lineHeight: 1.6 }}>
+                                <li>Deep Learning & Neural Network Architectures</li>
+                                <li>Computer Vision & Image Processing</li>
+                                <li>Full-Stack Web Development</li>
+                            </ul>
+                        </div>
+
+                        {/* Intermediate */}
+                        <div style={{ paddingLeft: '16px', borderLeft: '3px solid #10b981' }}>
+                            <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Intermediate Education</h3>
+                            <div style={{ color: 'var(--text)', fontSize: 15, fontWeight: 500 }}>Narayana Junior College</div>
+                            <div style={{ color: 'var(--muted)', fontSize: 14 }}>Mathematics, Physics, and Chemistry (MPC)</div>
+                        </div>
+
+                        {/* School */}
+                        <div style={{ paddingLeft: '16px', borderLeft: '3px solid #8b5cf6' }}>
+                            <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Secondary School Education</h3>
+                            <div style={{ color: 'var(--text)', fontSize: 15, fontWeight: 500 }}>Little Flower High School</div>
+                            <div style={{ color: 'var(--muted)', fontSize: 14 }}>Schooling</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="card" style={{ marginBottom: 20 }}>
@@ -130,7 +150,7 @@ export default function AboutPage() {
                         Let's build something amazing together and push the boundaries of what's possible with artificial intelligence! 🚀
                     </p>
                 </div>
-            </section>
-        </main>
+            </section >
+        </main >
     )
 }

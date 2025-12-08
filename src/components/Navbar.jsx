@@ -132,7 +132,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                             <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Events</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/speaking" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Speaking</NavLink>
+                            <NavLink to="/speaking" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Projects</NavLink>
                         </li>
                         <li>
                             <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>About</NavLink>

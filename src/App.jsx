@@ -23,7 +23,7 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
             '/': 'BOORA RAVITEJA - AI/ML Developer & Full-Stack Architect',
             '/about': 'About - BOORA RAVITEJA',
             '/blog': 'Events - BOORA RAVITEJA',
-            '/speaking': 'Speaking - BOORA RAVITEJA',
+            '/speaking': 'Projects - BOORA RAVITEJA',
             '/contact': 'Contact - BOORA RAVITEJA',
             '/student-aware': 'Student Aware - BOORA RAVITEJA'
         }

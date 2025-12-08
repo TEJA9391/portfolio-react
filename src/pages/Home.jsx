@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import TejImg from '../assets/tej.jpg'
+import BlockchainImg from '../assets/blockchain.png'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
 import SentimentImg from '../assets/sentiment.png'
@@ -17,6 +18,22 @@ export default function Home() {
     const [flyStyle, setFlyStyle] = useState(null)
     const [expandedProject, setExpandedProject] = useState(null)
     const contactBtnRef = useRef(null)
+    const projectsScrollRef = useRef(null)
+    const [hoveredProject, setHoveredProject] = useState(null)
+
+    const scrollProjects = (direction) => {
+        if (projectsScrollRef.current) {
+            const scrollAmount = 400
+            const newScrollPosition = direction === 'left'
+                ? projectsScrollRef.current.scrollLeft - scrollAmount
+                : projectsScrollRef.current.scrollLeft + scrollAmount
+
+            projectsScrollRef.current.scrollTo({
+                left: newScrollPosition,
+                behavior: 'smooth'
+            })
+        }
+    }
 
     const socialLinks = [
         {
@@ -72,6 +89,17 @@ export default function Home() {
     const projects = [
         {
             id: 1,
+            title: 'Blockchain Device Fingerprint Identity System',
+            shortDesc: 'Secure device identity verification system using blockchain technology and fingerprint authentication. Decentralized identity management with cryptographic security.',
+            fullDesc: 'A cutting-edge blockchain-based identity verification system that uses device fingerprinting and biometric authentication to create a secure, decentralized identity management solution. Features include immutable blockchain records, secure device registration, fingerprint verification simulation, and tamper-proof identity storage using distributed ledger technology.',
+            tags: ['Blockchain', 'React', 'Web3', 'Cryptography'],
+            features: ['Blockchain-based identity storage', 'Device fingerprint verification', 'Decentralized authentication', 'Cryptographic security', 'Immutable audit trail'],
+            github: 'https://github.com/TEJA9391/Blockchain-SecureChain',
+            demo: 'https://teja9391.github.io/Blockchain-SecureChain/',
+            image: BlockchainImg
+        },
+        {
+            id: 2,
             title: 'Emotion-Aware Study Assistant',
             shortDesc: 'AI-powered study platform that tracks student engagement and provides personalized learning recommendations using computer vision and ML algorithms.',
             fullDesc: 'A Flask-based web application that analyzes emotional state through facial recognition and voice analysis to provide personalized study recommendations. It uses computer vision and machine learning (DeepFace, TensorFlow) to monitor engagement in real-time.',
@@ -82,7 +110,7 @@ export default function Home() {
             image: EmotionStudyImg
         },
         {
-            id: 2,
+            id: 3,
             title: 'FixHub',
             shortDesc: 'Community-driven platform connecting users with local service providers and repair professionals. Full-stack web application with real-time messaging.',
             fullDesc: 'A marketplace platform connecting homeowners with local service professionals for repairs and maintenance. Features include real-time messaging, service provider ratings, booking management, and payment processing. Built with a robust backend and responsive React frontend.',
@@ -93,7 +121,7 @@ export default function Home() {
             image: FixHubImg
         },
         {
-            id: 3,
+            id: 4,
             title: 'Sentiment Analysis Web App',
             shortDesc: 'Web-based sentiment analysis tool using NLP to classify text emotions. Built with Flask backend and React frontend with real-time predictions.',
             fullDesc: 'A sophisticated NLP application that analyzes text sentiment in real-time. Uses pre-trained models to classify emotions and provide detailed sentiment scores. Features include batch processing, visualization of results, and API integration capabilities for external applications.',
@@ -369,157 +397,335 @@ export default function Home() {
                         <div style={{ color: 'var(--muted)', fontSize: 13 }}>Selected work</div>
                     </div>
 
-                    <div className="projects-grid">
-                        {projects.map((project) => (
-                            <div
-                                id={`project-${project.id}`}
-                                key={project.id}
-                                className={`proj ${expandedProject === project.id ? 'expanded' : ''}`}
-                                style={{
-                                    padding: 0,
-                                    overflow: 'hidden',
-                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
-                                }}
-                            >
-                                {project.image && (
-                                    <div style={{ width: '100%', height: expandedProject === project.id ? '300px' : '160px', overflow: 'hidden', transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1)', position: 'relative' }} className="project-image-wrapper">
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
-                                            onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                                            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-                                        />
-                                        {/* Not Available overlay for projects without code */}
-                                        {project.github === '#' && project.demo === '#' && (
-                                            <div className="not-available-overlay" style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                right: 0,
-                                                bottom: 0,
-                                                background: 'rgba(0, 0, 0, 0.75)',
-                                                backdropFilter: 'blur(8px)',
-                                                WebkitBackdropFilter: 'blur(8px)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                opacity: 0,
-                                                transition: 'opacity 0.3s ease',
-                                                pointerEvents: 'none',
-                                                zIndex: 10
-                                            }}>
-                                                <div style={{
-                                                    color: '#fff',
-                                                    fontSize: '18px',
-                                                    fontWeight: 600,
-                                                    textAlign: 'center',
-                                                    padding: '20px',
-                                                    background: 'rgba(239, 68, 68, 0.2)',
-                                                    border: '2px solid rgba(239, 68, 68, 0.5)',
-                                                    borderRadius: '12px',
-                                                    backdropFilter: 'blur(10px)',
-                                                    WebkitBackdropFilter: 'blur(10px)',
-                                                    boxShadow: '0 8px 32px rgba(239, 68, 68, 0.3)'
-                                                }}>
-                                                    🚫 Not Available
-                                                </div>
-                                            </div>
-                                        )}
-                                        {/* Fade-out gradient overlay */}
+                    <div
+                        className="projects-carousel-wrapper"
+                        style={{ position: 'relative', marginTop: '14px' }}
+                        onMouseEnter={(e) => {
+                            const leftBtn = e.currentTarget.querySelector('.scroll-btn-left')
+                            const rightBtn = e.currentTarget.querySelector('.scroll-btn-right')
+                            if (leftBtn) leftBtn.style.opacity = '1'
+                            if (rightBtn) rightBtn.style.opacity = '1'
+                        }}
+                        onMouseLeave={(e) => {
+                            const leftBtn = e.currentTarget.querySelector('.scroll-btn-left')
+                            const rightBtn = e.currentTarget.querySelector('.scroll-btn-right')
+                            if (leftBtn) leftBtn.style.opacity = '0'
+                            if (rightBtn) rightBtn.style.opacity = '0'
+                        }}
+                    >
+                        {/* Left Scroll Button - Netflix Style */}
+                        <button
+                            className="scroll-btn-left"
+                            onClick={() => scrollProjects('left')}
+                            style={{
+                                position: 'absolute',
+                                left: '-20px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                zIndex: 10,
+                                background: 'rgba(0, 0, 0, 0.8)',
+                                border: 'none',
+                                borderRadius: '4px',
+                                width: '50px',
+                                height: '100px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: 'white',
+                                fontSize: '32px',
+                                fontWeight: 'bold',
+                                opacity: 0,
+                                transition: 'opacity 0.3s ease, background 0.2s ease',
+                                boxShadow: '2px 0 8px rgba(0, 0, 0, 0.5)'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.background = 'rgba(0, 0, 0, 0.95)'
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.background = 'rgba(0, 0, 0, 0.8)'
+                            }}
+                            title="Scroll left"
+                        >
+                            ‹
+                        </button>
+
+                        {/* Right Scroll Button - Netflix Style */}
+                        <button
+                            className="scroll-btn-right"
+                            onClick={() => scrollProjects('right')}
+                            style={{
+                                position: 'absolute',
+                                right: '-20px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                zIndex: 10,
+                                background: 'rgba(0, 0, 0, 0.8)',
+                                border: 'none',
+                                borderRadius: '4px',
+                                width: '50px',
+                                height: '100px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: 'white',
+                                fontSize: '32px',
+                                fontWeight: 'bold',
+                                opacity: 0,
+                                transition: 'opacity 0.3s ease, background 0.2s ease',
+                                boxShadow: '-2px 0 8px rgba(0, 0, 0, 0.5)'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.background = 'rgba(0, 0, 0, 0.95)'
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.background = 'rgba(0, 0, 0, 0.8)'
+                            }}
+                            title="Scroll right"
+                        >
+                            ›
+                        </button>
+
+                        <div
+                            ref={projectsScrollRef}
+                            className="projects-grid"
+                            style={{
+                                display: 'flex',
+                                gap: 24,
+                                overflowX: 'auto',
+                                overflowY: 'hidden',
+                                scrollSnapType: 'x mandatory',
+                                WebkitOverflowScrolling: 'touch',
+                                scrollbarWidth: 'none',
+                                msOverflowStyle: 'none',
+                                paddingBottom: '10px'
+                            }}
+                        >
+                            {projects.map((project) => (
+                                <div
+                                    id={`project-${project.id}`}
+                                    key={project.id}
+                                    className="proj"
+                                    style={{
+                                        padding: 0,
+                                        overflow: 'hidden',
+                                        minWidth: '350px',
+                                        maxWidth: '350px',
+                                        flexShrink: 0,
+                                        scrollSnapAlign: 'start',
+                                        filter: project.id === 4
+                                            ? 'blur(2px)'
+                                            : (hoveredProject && hoveredProject !== project.id ? 'blur(1.5px) brightness(0.85)' : 'none'),
+                                        opacity: project.id === 4 ? 0.6 : 1,
+                                        transition: 'transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease',
+                                        cursor: 'pointer'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        if (project.id !== 4) {
+                                            setHoveredProject(project.id)
+                                            e.currentTarget.style.transform = 'scale(1.05)'
+                                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.3)'
+                                            e.currentTarget.style.zIndex = '5'
+                                        }
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        if (project.id !== 4) {
+                                            setHoveredProject(null)
+                                            e.currentTarget.style.transform = 'scale(1)'
+                                            e.currentTarget.style.boxShadow = ''
+                                            e.currentTarget.style.zIndex = '1'
+                                        }
+                                    }}
+                                >
+                                    {/* Coming Soon Overlay for 4th project */}
+                                    {project.id === 4 && (
                                         <div style={{
                                             position: 'absolute',
-                                            bottom: 0,
-                                            left: 0,
-                                            right: 0,
-                                            height: '60%',
-                                            background: 'linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 70%, var(--card-bg) 100%)',
-                                            pointerEvents: 'none'
-                                        }}></div>
-                                    </div>
-                                )}
-                                <div style={{ padding: '16px' }}>
-                                    <h4 style={{
-                                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05))',
-                                        padding: '8px 12px',
-                                        borderRadius: '6px',
-                                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                                        marginBottom: '12px'
-                                    }}>{project.title}</h4>
-                                    <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
+                                            top: '50%',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%)',
+                                            zIndex: 20,
+                                            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(147, 51, 234, 0.95))',
+                                            padding: '16px 32px',
+                                            borderRadius: '12px',
+                                            boxShadow: '0 8px 32px rgba(59, 130, 246, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                                            backdropFilter: 'blur(10px)',
+                                            textAlign: 'center'
+                                        }}>
+                                            <div style={{ fontSize: '24px', marginBottom: '8px' }}>🚀</div>
+                                            <div style={{
+                                                color: 'white',
+                                                fontSize: '18px',
+                                                fontWeight: 700,
+                                                letterSpacing: '0.5px',
+                                                textTransform: 'uppercase'
+                                            }}>Coming Soon</div>
+                                            <div style={{
+                                                color: 'rgba(255, 255, 255, 0.9)',
+                                                fontSize: '12px',
+                                                marginTop: '4px',
+                                                fontWeight: 400
+                                            }}>In Development</div>
+                                        </div>
+                                    )}
+                                    {project.image && (
+                                        <div style={{ width: '100%', height: '160px', overflow: 'hidden', position: 'relative' }} className="project-image-wrapper">
+                                            <img
+                                                src={project.image}
+                                                alt={project.title}
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
+                                                onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                                                onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                                            />
+                                            {/* Not Available overlay for projects without code */}
+                                            {project.github === '#' && project.demo === '#' && (
+                                                <div className="not-available-overlay" style={{
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    left: 0,
+                                                    right: 0,
+                                                    bottom: 0,
+                                                    background: 'rgba(0, 0, 0, 0.75)',
+                                                    backdropFilter: 'blur(8px)',
+                                                    WebkitBackdropFilter: 'blur(8px)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    opacity: 0,
+                                                    transition: 'opacity 0.3s ease',
+                                                    pointerEvents: 'none',
+                                                    zIndex: 10
+                                                }}>
+                                                    <div style={{
+                                                        color: '#fff',
+                                                        fontSize: '18px',
+                                                        fontWeight: 600,
+                                                        textAlign: 'center',
+                                                        padding: '20px',
+                                                        background: 'rgba(239, 68, 68, 0.2)',
+                                                        border: '2px solid rgba(239, 68, 68, 0.5)',
+                                                        borderRadius: '12px',
+                                                        backdropFilter: 'blur(10px)',
+                                                        WebkitBackdropFilter: 'blur(10px)',
+                                                        boxShadow: '0 8px 32px rgba(239, 68, 68, 0.3)'
+                                                    }}>
+                                                        🚫 Not Available
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {/* Fade-out gradient overlay */}
+                                            <div style={{
+                                                position: 'absolute',
+                                                bottom: 0,
+                                                left: 0,
+                                                right: 0,
+                                                height: '60%',
+                                                background: 'linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 70%, var(--card-bg) 100%)',
+                                                pointerEvents: 'none'
+                                            }}></div>
+                                        </div>
+                                    )}
+                                    <div style={{ padding: '16px' }}>
+                                        <h4 style={{
+                                            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05))',
+                                            padding: '8px 12px',
+                                            borderRadius: '6px',
+                                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                                            marginBottom: '12px'
+                                        }}>{project.title}</h4>
+                                        <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
 
-                                    <div style={{
-                                        maxHeight: expandedProject === project.id ? '800px' : '0',
-                                        opacity: expandedProject === project.id ? 1 : 0,
-                                        overflow: 'hidden',
-                                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                                        marginTop: expandedProject === project.id ? 16 : 0,
-                                        paddingTop: expandedProject === project.id ? 16 : 0,
-                                        paddingBottom: expandedProject === project.id ? 8 : 0,
-                                        paddingLeft: expandedProject === project.id ? 12 : 0,
-                                        paddingRight: expandedProject === project.id ? 12 : 0,
-                                        borderLeft: expandedProject === project.id ? '3px solid #3b82f6' : '3px solid transparent',
-                                        background: expandedProject === project.id ? 'rgba(59, 130, 246, 0.03)' : 'transparent',
-                                        borderRadius: '8px'
-                                    }}>
-                                        <div>
-                                            {/* Description */}
-                                            <p style={{
-                                                margin: '0 0 16px 0',
-                                                color: 'var(--text)',
-                                                fontSize: 14,
-                                                lineHeight: 1.6,
-                                                opacity: expandedProject === project.id ? 1 : 0,
-                                                transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
-                                                transition: 'all 0.3s ease 0.1s'
-                                            }}>{project.fullDesc}</p>
+                                        <div style={{
+                                            maxHeight: expandedProject === project.id ? '800px' : '0',
+                                            opacity: expandedProject === project.id ? 1 : 0,
+                                            overflow: 'hidden',
+                                            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                            marginTop: expandedProject === project.id ? 16 : 0,
+                                            paddingTop: expandedProject === project.id ? 16 : 0,
+                                            paddingBottom: expandedProject === project.id ? 8 : 0,
+                                            paddingLeft: expandedProject === project.id ? 12 : 0,
+                                            paddingRight: expandedProject === project.id ? 12 : 0,
+                                            borderLeft: expandedProject === project.id ? '3px solid #3b82f6' : '3px solid transparent',
+                                            background: expandedProject === project.id ? 'rgba(59, 130, 246, 0.03)' : 'transparent',
+                                            borderRadius: '8px'
+                                        }}>
+                                            <div>
+                                                {/* Description */}
+                                                <p style={{
+                                                    margin: '0 0 16px 0',
+                                                    color: 'var(--text)',
+                                                    fontSize: 14,
+                                                    lineHeight: 1.6,
+                                                    opacity: expandedProject === project.id ? 1 : 0,
+                                                    transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
+                                                    transition: 'all 0.3s ease 0.1s'
+                                                }}>{project.fullDesc}</p>
 
-                                            {/* Key Features Header */}
-                                            <p style={{
-                                                margin: '0 0 8px 0',
-                                                color: 'var(--text)',
-                                                fontSize: 13,
-                                                fontWeight: 600,
-                                                opacity: expandedProject === project.id ? 1 : 0,
-                                                transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
-                                                transition: 'all 0.3s ease 0.15s'
-                                            }}>✨ Key Features</p>
+                                                {/* Key Features Header */}
+                                                <p style={{
+                                                    margin: '0 0 8px 0',
+                                                    color: 'var(--text)',
+                                                    fontSize: 13,
+                                                    fontWeight: 600,
+                                                    opacity: expandedProject === project.id ? 1 : 0,
+                                                    transform: expandedProject === project.id ? 'translateY(0)' : 'translateY(10px)',
+                                                    transition: 'all 0.3s ease 0.15s'
+                                                }}>✨ Key Features</p>
 
-                                            <ul style={{ margin: '0', paddingLeft: 20, color: 'var(--muted)', fontSize: 13, lineHeight: 1.8 }}>
-                                                {project.features.map((feature, idx) => (
-                                                    <li key={idx} style={{
-                                                        marginBottom: 6,
-                                                        opacity: expandedProject === project.id ? 1 : 0,
-                                                        transform: expandedProject === project.id ? 'translateX(0)' : 'translateX(-5px)',
-                                                        transition: `all 0.25s ease ${0.2 + (idx * 0.05)}s`
-                                                    }}>{feature}</li>
-                                                ))}
-                                            </ul>
+                                                <ul style={{ margin: '0', paddingLeft: 20, color: 'var(--muted)', fontSize: 13, lineHeight: 1.8 }}>
+                                                    {project.features.map((feature, idx) => (
+                                                        <li key={idx} style={{
+                                                            marginBottom: 6,
+                                                            opacity: expandedProject === project.id ? 1 : 0,
+                                                            transform: expandedProject === project.id ? 'translateX(0)' : 'translateX(-5px)',
+                                                            transition: `all 0.25s ease ${0.2 + (idx * 0.05)}s`
+                                                        }}>{feature}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div className="tags" style={{ marginTop: expandedProject === project.id ? 12 : 8 }}>
+                                            {project.tags.map((tag, idx) => (
+                                                <span key={idx} className="tag">{tag}</span>
+                                            ))}
+                                        </div>
+
+                                        <div className="buttons" style={{ marginTop: 12, display: 'flex', gap: 10 }}>
+                                            <a
+                                                className="btn btn-ghost"
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                style={{
+                                                    opacity: project.github === '#' ? 0.5 : 1,
+                                                    pointerEvents: project.github === '#' ? 'none' : 'auto',
+                                                    cursor: project.github === '#' ? 'not-allowed' : 'pointer'
+                                                }}
+                                            >
+                                                {project.github === '#' ? 'Private' : 'GitHub'}
+                                            </a>
+                                            {project.demo && project.demo !== '#' && (
+                                                <a className="btn btn-ghost" href={project.demo} target="_blank" rel="noreferrer">Demo</a>
+                                            )}
+                                            {project.demo === '#' && (
+                                                <span className="btn btn-ghost" style={{ opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none' }}>
+                                                    Demo Soon
+                                                </span>
+                                            )}
+                                            <Link
+                                                className="btn btn-primary"
+                                                to={`/speaking?project=${project.id}`}
+                                                style={{ cursor: 'pointer', textDecoration: 'none' }}
+                                            >
+                                                Learn more →
+                                            </Link>
                                         </div>
                                     </div>
-
-                                    <div className="tags" style={{ marginTop: expandedProject === project.id ? 12 : 8 }}>
-                                        {project.tags.map((tag, idx) => (
-                                            <span key={idx} className="tag">{tag}</span>
-                                        ))}
-                                    </div>
-
-                                    <div className="buttons" style={{ marginTop: 12, display: 'flex', gap: 10 }}>
-                                        <a className="btn btn-ghost" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
-                                        {project.demo && project.demo !== '#' && (
-                                            <a className="btn btn-ghost" href={project.demo} target="_blank" rel="noreferrer">Demo</a>
-                                        )}
-                                        <button
-                                            className="btn btn-primary"
-                                            onClick={() => toggleProject(project.id)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            {expandedProject === project.id ? 'Show less' : 'Learn more'}
-                                        </button>
-                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </section>
 
