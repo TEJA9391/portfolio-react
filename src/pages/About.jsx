@@ -150,7 +150,7 @@ export default function AboutPage() {
                         Let's build something amazing together and push the boundaries of what's possible with artificial intelligence! 🚀
                     </p>
                 </div>
-            </section >
-        </main >
+            </section>
+        </main>
     )
 }
