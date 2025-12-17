@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import EmailChooser from './EmailChooser'
 
 export default function Footer() {
+    const [showEmailChooser, setShowEmailChooser] = useState(false)
+    const emailAddress = 'tejrtej9347@gmail.com'
+
     const socials = [
         { href: 'https://github.com/TEJA9391', label: 'GitHub', svg: (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.6 2.99 8.51 7.14 9.9.52.09.71-.23.71-.5 0-.25-.01-.92-.01-1.8-2.9.63-3.51-1.4-3.51-1.4-.47-1.2-1.15-1.52-1.15-1.52-.94-.64.07-.62.07-.62 1.04.07 1.58 1.08 1.58 1.08.92 1.56 2.42 1.11 3.01.85.09-.66.36-1.11.66-1.36-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.06-2.8-.11-.26-.46-1.32.1-2.75 0 0 .87-.28 2.85 1.06a9.77 9.77 0 0 1 2.6-.35c.88 0 1.77.12 2.6.35 1.98-1.34 2.85-1.06 2.85-1.06.56 1.43.21 2.49.1 2.75.66.73 1.06 1.66 1.06 2.8 0 4.01-2.45 4.9-4.78 5.16.37.32.7.95.7 1.92 0 1.39-.01 2.51-.01 2.85 0 .28.19.6.72.5 4.15-1.39 7.14-5.3 7.14-9.9C23.1 5.33 18.27.5 12 .5z" fill="currentColor" /></svg>) },
         { href: 'https://www.linkedin.com/in/boora-raviteja-a856a9352?', label: 'LinkedIn', svg: (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6S0 4.88 0 3.5 1.08 1 2.5 1 4.98 2.12 4.98 3.5zM.3 24h4.4V7.99H.3V24zM8.23 24h4.22v-8.03c0-1.9.36-3.56 2.74-3.56 2.36 0 2.37 2.15 2.37 3.66V24h4.22V14.56c0-4.89-1.04-8.63-6.4-8.63-2.78 0-4.53 1.55-5.29 2.64h.07V7.99H8.23c.06 1.85 0 16.01 0 16.01z" fill="currentColor" /></svg>) },
+        { href: '#', label: 'Email', isEmail: true, svg: (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" /><path d="M22 6l-10 7L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>) },
         { href: 'https://instagram.com/tejr_tej', label: 'Instagram', svg: (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2A4.8 4.8 0 1 0 16.8 13 4.8 4.8 0 0 0 12 8.2zm6.4-3.2a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1zM12 10.5A1.5 1.5 0 1 1 10.5 12 1.5 1.5 0 0 1 12 10.5z" fill="currentColor" /></svg>) },
         { href: 'https://discord.com/users/1439874443341070368', label: 'Discord', svg: (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.317 4.369A19.791 19.791 0 0016.879 3c-.28.48-.6 1.11-.824 1.61-2.444-.36-4.874-.36-7.28 0-.225-.5-.545-1.13-.825-1.61A19.736 19.736 0 003.683 4.37C1.06 8.06.4 11.61.94 15.06c2.54 1.9 5.02 2.93 7.5 3.66 0 0 .56-.77.99-1.45-2.25-.68-3.11-1.31-3.11-1.31s.52.35 1.4.74c2.54 1.13 5.3 1.13 7.84 0 .88-.39 1.4-.74 1.4-.74s-.86.63-3.11 1.31c.43.68.99 1.45.99 1.45 2.48-.73 4.96-1.76 7.5-3.66.54-3.45-.12-7-2.74-10.69zM9.5 12.25c-.83 0-1.5-.75-1.5-1.68 0-.93.67-1.68 1.5-1.68.83 0 1.5.75 1.5 1.68 0 .93-.67 1.68-1.5 1.68zm5 0c-.83 0-1.5-.75-1.5-1.68 0-.93.67-1.68 1.5-1.68.83 0 1.5.75 1.5 1.68 0 .93-.67 1.68-1.5 1.68z" fill="currentColor" /></svg>) }
     ]
@@ -13,11 +18,47 @@ export default function Footer() {
             <div>© 2025 Teja — Portfolio</div>
             <div className="socials" style={{ marginTop: 10 }}>
                 {socials.map((s, i) => (
-                    <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label} className="social-btn" style={{ animationDelay: `${i * 0.06}s` }}>
-                        {s.svg}
-                    </a>
+                    s.isEmail ? (
+                        <button
+                            key={s.label}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setShowEmailChooser(true)
+                            }}
+                            aria-label={s.label}
+                            title={s.label}
+                            className="social-btn"
+                            style={{
+                                animationDelay: `${i * 0.06}s`,
+                                background: 'none',
+                                padding: 0,
+                                cursor: 'pointer'
+                            }}
+                        >
+                            {s.svg}
+                        </button>
+                    ) : (
+                        <a
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={s.label}
+                            title={s.label}
+                            className="social-btn"
+                            style={{ animationDelay: `${i * 0.06}s` }}
+                        >
+                            {s.svg}
+                        </a>
+                    )
                 ))}
             </div>
+
+            <EmailChooser
+                isOpen={showEmailChooser}
+                onClose={() => setShowEmailChooser(false)}
+                emailAddress={emailAddress}
+            />
         </footer>
     )
 }

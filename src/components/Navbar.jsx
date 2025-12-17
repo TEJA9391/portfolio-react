@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import ContactPopup from "./ContactPopup";
+import boy from '../assets/boy.png';
 
 
 export default function Navbar({ isDarkMode, setIsDarkMode }) {
@@ -101,8 +102,20 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
     return (
         <header>
             <div className="nav-wrap">
-                <div className="brand">
-                    <span className="color-ring" aria-hidden="true"></span>
+                <NavLink
+                    to="/"
+                    className="brand"
+                    style={{ textDecoration: 'none', cursor: 'pointer' }}
+                    onClick={(e) => {
+                        // Smooth scroll to top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        // Close mobile menu if open
+                        closeMobileMenu();
+                    }}
+                >
+                    <div className="color-ring" aria-hidden="true" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <img src={boy} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
                     <div>
                         <div className="name">
                             <span style={{ color: 'var(--text)' }}>BOORA </span>
@@ -110,7 +123,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                             <span style={{ color: 'var(--text)' }}>TEJA</span>
                         </div>
                     </div>
-                </div>
+                </NavLink>
 
                 <button
                     className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
@@ -129,10 +142,10 @@ export default function Navbar({ isDarkMode, setIsDarkMode }) {
                             <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Events</NavLink>
+                            <NavLink to="/events" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Events</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/speaking" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Projects</NavLink>
+                            <NavLink to="/projects" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>Projects</NavLink>
                         </li>
                         <li>
                             <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMobileMenu}>About</NavLink>

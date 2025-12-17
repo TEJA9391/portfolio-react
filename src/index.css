@@ -5,14 +5,14 @@
     --text: #111;
     --muted: #6b6570;
     --accent: #232323;
-    --container: 1200px
+    --container: 100%
 }
 
 [data-theme="dark"] {
     --bg: #0f1419;
-    --text: #e8eaed;
-    --muted: #9ca3af;
-    --accent: #3b82f6;
+    --text: #ffffff;
+    --muted: #44577a;
+    --accent: #0062ff;
 }
 
 /* View Transition API for theme toggle animation */
@@ -97,7 +97,7 @@ header.scrolled .brand .name {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 22px;
+    padding: 14px 40px;
     transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -142,6 +142,49 @@ header.scrolled .brand .name {
     background-size: 400% 400%;
     animation: flowingColors 8s ease infinite;
     box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+}
+
+.color-ring {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Gradient border effect using padding */
+    padding: 3px;
+    /* Specific colors: Blue, Black, White, Related Blues */
+    background: linear-gradient(45deg, #000000, #3b82f6, #ffffff, #1e40af, #60a5fa, #000000);
+    background-size: 400% 400%;
+    animation: flowingColors 6s linear infinite;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.color-ring::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    /* border width */
+    border-radius: 50%;
+    background: #fff;
+    /* White background behind image */
+    z-index: -1;
+}
+
+[data-theme="dark"] .color-ring::before {
+    background: #0f1419;
+}
+
+.color-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: #fff;
+    /* Ensure white bg */
 }
 
 .brand .name {
@@ -914,36 +957,7 @@ footer {
     margin-top: 8px
 }
 
-.socials a {
-    display: inline-flex;
-    width: 36px;
-    height: 36px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    text-decoration: none;
-    color: var(--muted);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    position: relative;
-}
-
-.socials a:hover {
-    transform: translateY(-4px);
-    color: var(--accent);
-    border-color: var(--accent);
-    background: rgba(0, 0, 0, 0.02);
-}
-
-[data-theme="dark"] .socials a {
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-[data-theme="dark"] .socials a:hover {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.4);
-    color: #60a5fa;
-}
+/* Old .socials a styles removed to prevent conflicts with .social-btn */
 
 .social-btn {
     display: inline-flex;
@@ -952,9 +966,10 @@ footer {
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    color: var(--muted);
+    border: 1px solid #e2e8f0;
+    color: #1e293b;
     background: transparent;
-    transition: transform 220ms cubic-bezier(.22, 1, .36, 1), box-shadow 200ms, color 160ms;
+    transition: transform 220ms cubic-bezier(.22, 1, .36, 1), box-shadow 200ms, color 160ms, border-color 160ms;
     will-change: transform;
     box-shadow: none;
     opacity: 0;
@@ -969,9 +984,10 @@ footer {
 
 .social-btn:hover,
 .social-btn:focus {
-    transform: translateY(-4px) scale(2);
-    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
-    color: var(--text);
+    transform: translateY(-4px) scale(1.2);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    color: #000;
+    border-color: #000;
 }
 
 @keyframes socialEnter {
@@ -979,6 +995,30 @@ footer {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+[data-theme="dark"] .social-btn {
+    border: 1px solid #e2e8f0;
+    color: #e2e8f0;
+    /* Keeping it bright for dark mode visibility, effectively 'same' intent of visibility */
+}
+
+/* If the user meant EXACTLY the same dark slate color #1e293b in dark mode, it might be invisible against dark background. 
+   "Same colors" usually means same visual style/palette. 
+   But if they strictly want #1e293b, it would be hard to see. 
+   I will assume they want the "Lucid/Bright" style to be consistent. 
+   Actually, let's try to interpret "same colors" as the HOVER colors and general look. 
+   
+   Let's ensure the HOVER black color is consistent if that's what they liked.
+*/
+
+[data-theme="dark"] .social-btn:hover,
+[data-theme="dark"] .social-btn:focus {
+    background: #fff;
+    border-color: #fff;
+    color: #000;
+    /* Consistent black text on hover like light mode */
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
 }
 
 .contact-icon {
@@ -2591,3 +2631,121 @@ footer {
             font-size: 22px !important;
         }
     }
+}
+
+/* Relocated Contact Form Styles for Professional Look */
+.contact-grid {
+    display: grid;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-control label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    /* Ensure padding doesn't affect width */
+}
+
+[data-theme="dark"] .form-input {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.form-input.error {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.form-input.valid {
+    border-color: #22c55e;
+}
+
+textarea.form-input {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.btn-submit {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-submit:disabled {
+    background: var(--muted);
+    opacity: 0.5;
+}
+
+/* 2-Column Contact Layout */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: start;
+    padding: 30px;
+    /* Increased padding for better spacing */
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px;
+    }
+}
+
+
+.contact-title-text {
+    font-size: 24px;
+    margin: 0 0 16px;
+    font-weight: 700;
+    color: #000000;
+    /* Light mode: Black */
+}
+
+[data-theme="dark"] .contact-title-text {
+    color: #3b82f6;
+    /* Dark mode: Blue */
+}

@@ -22,8 +22,8 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
         const pageTitles = {
             '/': 'BOORA RAVITEJA - AI/ML Developer & Full-Stack Architect',
             '/about': 'About - BOORA RAVITEJA',
-            '/blog': 'Events - BOORA RAVITEJA',
-            '/speaking': 'Projects - BOORA RAVITEJA',
+            '/events': 'Events - BOORA RAVITEJA',
+            '/projects': 'Projects - BOORA RAVITEJA',
             '/contact': 'Contact - BOORA RAVITEJA',
             '/student-aware': 'Student Aware - BOORA RAVITEJA'
         }
@@ -46,8 +46,8 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<AboutPage />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/speaking" element={<Speaking />} />
+                <Route path="/events" element={<Blog />} />
+                <Route path="/projects" element={<Speaking />} />
                 <Route path="/contact" element={<Contact />} />
 
                 {/* ✅ ADD THIS ROUTE */}

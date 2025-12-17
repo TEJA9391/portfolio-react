@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { LuMail, LuMapPin } from "react-icons/lu";
+import { Link, useNavigate } from 'react-router-dom'
 import TejImg from '../assets/tej.jpg'
 import BlockchainImg from '../assets/blockchain.png'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
 import SentimentImg from '../assets/sentiment.png'
-import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaYoutube, FaFacebook } from 'react-icons/fa'
+import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaFacebook, FaEnvelope } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import EmailChooser from '../components/EmailChooser'
 
 export default function Home() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({ name: '', email: '', message: '' })
     const [errors, setErrors] = useState({})
     const [touched, setTouched] = useState({})
@@ -17,6 +20,7 @@ export default function Home() {
     const [isAnimating, setIsAnimating] = useState(false)
     const [flyStyle, setFlyStyle] = useState(null)
     const [expandedProject, setExpandedProject] = useState(null)
+    const [showEmailChooser, setShowEmailChooser] = useState(false)
     const contactBtnRef = useRef(null)
     const projectsScrollRef = useRef(null)
     const [hoveredProject, setHoveredProject] = useState(null)
@@ -61,6 +65,13 @@ export default function Home() {
             icon: <FaLinkedin size={24} />
         },
         {
+            name: 'Email',
+            url: '#',
+            isEmail: true,
+            color: '#EA4335',
+            icon: <FaEnvelope size={24} />
+        },
+        {
             name: 'GitHub',
             url: 'https://github.com/TEJA9391',
             color: '#333333',
@@ -71,12 +82,6 @@ export default function Home() {
             url: 'https://discord.com/users/1439874443341070368',
             color: '#5865F2',
             icon: <FaDiscord size={24} />
-        },
-        {
-            name: 'YouTube',
-            url: 'https://youtube.com/',
-            color: '#FF0000',
-            icon: <FaYoutube size={24} />
         },
         {
             name: 'Facebook',
@@ -346,7 +351,7 @@ export default function Home() {
                                         setIsContactOpen(true)
                                     }}
                                 >
-                                    ×
+                                    x
                                 </div>
                             )}
                         </div>
@@ -357,8 +362,15 @@ export default function Home() {
             <main>
                 <section id="about" className="fade-in">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-                        <h3 style={{ margin: 0, fontWeight: 600 }}>About Me</h3>
-                        <div style={{ color: 'var(--muted)', fontSize: 13 }}>Simple, minimal bio</div>
+                        <h3
+                            style={{ margin: 0, fontWeight: 600, cursor: 'pointer', transition: 'color 0.2s ease' }}
+                            onClick={() => navigate('/about')}
+                            onMouseEnter={(e) => e.target.style.color = '#3b82f6'}
+                            onMouseLeave={(e) => e.target.style.color = ''}
+                        >
+                            About Me
+                        </h3>
+                        <div style={{ color: 'var(--muted)', fontSize: 13 }}></div>
                     </div>
 
                     <div style={{ height: 14 }}></div>
@@ -393,8 +405,15 @@ export default function Home() {
 
                 <section id="projects" className="fade-in delay">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-                        <h3 style={{ margin: 0, fontWeight: 600 }}>Projects</h3>
-                        <div style={{ color: 'var(--muted)', fontSize: 13 }}>Selected work</div>
+                        <h3
+                            style={{ margin: 0, fontWeight: 600, cursor: 'pointer', transition: 'color 0.2s ease' }}
+                            onClick={() => navigate('/projects')}
+                            onMouseEnter={(e) => e.target.style.color = '#3b82f6'}
+                            onMouseLeave={(e) => e.target.style.color = ''}
+                        >
+                            Projects
+                        </h3>
+                        <div style={{ color: 'var(--muted)', fontSize: 13 }}></div>
                     </div>
 
                     <div
@@ -716,7 +735,7 @@ export default function Home() {
                                             )}
                                             <Link
                                                 className="btn btn-primary"
-                                                to={`/speaking?project=${project.id}`}
+                                                to={`/projects?project=${project.id}`}
                                                 style={{ cursor: 'pointer', textDecoration: 'none' }}
                                             >
                                                 Learn more →
@@ -737,128 +756,180 @@ export default function Home() {
 
                     <div style={{ height: 14 }}></div>
 
-                    <div className="card">
-                        {submitted && (
-                            <div style={{
-                                padding: '12px 16px',
-                                marginBottom: '16px',
-                                backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                                border: '1px solid rgba(34, 197, 94, 0.3)',
-                                borderRadius: '8px',
-                                color: '#22c55e',
-                                fontSize: '14px',
-                                fontWeight: 500
-                            }}>
-                                ✓ Message sent successfully! I'll get back to you soon.
-                            </div>
-                        )}
+                    <div className="card contact-wrapper">
 
-                        <form
-                            className="contact-grid"
-                            action="https://formsubmit.co/tejrtej9347@gmail.com"
-                            method="POST"
-                            onSubmit={handleSubmit}
-                        >
-                            <input type="hidden" name="_captcha" value="false" />
-                            <input type="hidden" name="_template" value="table" />
-                            <input type="hidden" name="_subject" value="New Contact from Portfolio - tejrtej9347@gmail.com" />
-                            <input type="hidden" name="_next" value="https://teja9391.github.io/portfolio-react/" />
-                            <input type="hidden" name="_autoresponse" value="Thank you for contacting me! I'll get back to you soon." />
 
-                            <div className="form-control">
-                                <label htmlFor="name">
-                                    Name
-                                    {isFieldValid('name') && <span style={{ color: '#22c55e', marginLeft: '4px' }}>✓</span>}
-                                </label>
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Your name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={`form-input ${isFieldError('name') ? 'error' : ''} ${isFieldValid('name') ? 'valid' : ''}`}
-                                />
-                                {isFieldError('name') && (
-                                    <span style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                        ✗ {errors.name}
-                                    </span>
-                                )}
-                                {isFieldValid('name') && (
-                                    <span style={{ color: '#22c55e', fontSize: '12px', marginTop: '4px' }}>Looks good!</span>
-                                )}
-                            </div>
+                        {/* LEFT COLUMN: Contact Info */}
+                        <div className="contact-info-column">
+                            <h4 className="contact-title-text">Let's work together</h4>
+                            <p style={{ color: 'var(--muted)', marginBottom: '24px', lineHeight: '1.6' }}>
+                                Have a project in mind or just want to chat? Feel free to reach out directly.
+                            </p>
 
-                            <div className="form-control">
-                                <label htmlFor="email">
-                                    Email
-                                    {isFieldValid('email') && <span style={{ color: '#22c55e', marginLeft: '4px' }}>✓</span>}
-                                </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="you@example.com"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={`form-input ${isFieldError('email') ? 'error' : ''} ${isFieldValid('email') ? 'valid' : ''}`}
-                                />
-                                {isFieldError('email') && (
-                                    <span style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                        ✗ {errors.email}
-                                    </span>
-                                )}
-                                {isFieldValid('email') && (
-                                    <span style={{ color: '#22c55e', fontSize: '12px', marginTop: '4px' }}>Valid email!</span>
-                                )}
-                            </div>
-
-                            <div className="form-control" style={{ gridColumn: '1 / -1' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <label htmlFor="message">
-                                        Message
-                                        {isFieldValid('message') && <span style={{ color: '#22c55e', marginLeft: '4px' }}>✓</span>}
-                                    </label>
-                                    <span style={{ fontSize: '12px', color: 'var(--muted)' }}>
-                                        {formData.message.length}/1000
-                                    </span>
+                            <div className="contact-details-list" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                    <div style={{
+                                        width: '40px',
+                                        height: '40px',
+                                        borderRadius: '50%',
+                                        background: 'rgba(59, 130, 246, 0.1)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: '#3b82f6'
+                                    }}>
+                                        <LuMail size={20} />
+                                    </div>
+                                    <div>
+                                        <div style={{ fontSize: '12px', color: 'var(--muted)' }}>Email</div>
+                                        <a href="mailto:tejrtej9347@gmail.com" style={{ color: 'var(--text)', textDecoration: 'none', fontWeight: 500 }}>tejrtej9347@gmail.com</a>
+                                    </div>
                                 </div>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    placeholder="Hello — how can I help?"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={`form-input ${isFieldError('message') ? 'error' : ''} ${isFieldValid('message') ? 'valid' : ''}`}
-                                ></textarea>
-                                {isFieldError('message') && (
-                                    <span style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                        ✗ {errors.message}
-                                    </span>
-                                )}
-                                {isFieldValid('message') && (
-                                    <span style={{ color: '#22c55e', fontSize: '12px', marginTop: '4px' }}>Great message!</span>
-                                )}
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                    <div style={{
+                                        width: '40px',
+                                        height: '40px',
+                                        borderRadius: '50%',
+                                        background: 'rgba(59, 130, 246, 0.1)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: '#3b82f6'
+                                    }}>
+                                        <LuMapPin size={20} />
+                                    </div>
+                                    <div>
+                                        <div style={{ fontSize: '12px', color: 'var(--muted)' }}>Location</div>
+                                        <div style={{ color: 'var(--text)', fontWeight: 500 }}>Hyderabad, Telangana, India</div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div className="submit-wrap" style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'flex-start' }}>
-                                <button
-                                    className="btn-submit"
-                                    type="submit"
-                                    disabled={Object.keys(formData).some(key => !formData[key].trim())}
-                                    style={{
-                                        opacity: Object.keys(formData).some(key => !formData[key].trim()) ? 0.6 : 1,
-                                        cursor: Object.keys(formData).some(key => !formData[key].trim()) ? 'not-allowed' : 'pointer',
-                                        transition: 'all 0.3s ease'
-                                    }}
-                                >
-                                    Send message
-                                </button>
-                            </div>
-                        </form>
+                        {/* RIGHT COLUMN: Form */}
+                        <div className="contact-form-column">
+                            {submitted && (
+                                <div style={{
+                                    padding: '12px 16px',
+                                    marginBottom: '16px',
+                                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                                    border: '1px solid rgba(34, 197, 94, 0.3)',
+                                    borderRadius: '8px',
+                                    color: '#22c55e',
+                                    fontSize: '14px',
+                                    fontWeight: 500
+                                }}>
+                                    ✓ Message sent successfully! I'll get back to you soon.
+                                </div>
+                            )}
+
+                            <form
+                                className="contact-grid"
+                                action="https://formsubmit.co/tejrtej9347@gmail.com"
+                                method="POST"
+                                onSubmit={handleSubmit}
+                            >
+                                <input type="hidden" name="_captcha" value="false" />
+                                <input type="hidden" name="_template" value="table" />
+                                <input type="hidden" name="_subject" value="New Contact from Portfolio - tejrtej9347@gmail.com" />
+                                <input type="hidden" name="_next" value="https://teja9391.github.io/portfolio-react/" />
+                                <input type="hidden" name="_autoresponse" value="Thank you for contacting me! I'll get back to you soon." />
+
+                                <div className="form-control">
+                                    <label htmlFor="name">
+                                        Name
+                                        {isFieldValid('name') && <span style={{ color: '#22c55e', marginLeft: '4px' }}>✓</span>}
+                                    </label>
+                                    <input
+                                        id="name"
+                                        name="name"
+                                        type="text"
+                                        placeholder="Your name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`form-input ${isFieldError('name') ? 'error' : ''} ${isFieldValid('name') ? 'valid' : ''}`}
+                                    />
+                                    {isFieldError('name') && (
+                                        <span style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            ✗ {errors.name}
+                                        </span>
+                                    )}
+                                    {isFieldValid('name') && (
+                                        <span style={{ color: '#22c55e', fontSize: '12px', marginTop: '4px' }}>Looks good!</span>
+                                    )}
+                                </div>
+
+                                <div className="form-control">
+                                    <label htmlFor="email">
+                                        Email
+                                        {isFieldValid('email') && <span style={{ color: '#22c55e', marginLeft: '4px' }}>✓</span>}
+                                    </label>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="you@example.com"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`form-input ${isFieldError('email') ? 'error' : ''} ${isFieldValid('email') ? 'valid' : ''}`}
+                                    />
+                                    {isFieldError('email') && (
+                                        <span style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            ✗ {errors.email}
+                                        </span>
+                                    )}
+                                    {isFieldValid('email') && (
+                                        <span style={{ color: '#22c55e', fontSize: '12px', marginTop: '4px' }}>Valid email!</span>
+                                    )}
+                                </div>
+
+                                <div className="form-control" style={{ gridColumn: '1 / -1' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <label htmlFor="message">
+                                            Message
+                                            {isFieldValid('message') && <span style={{ color: '#22c55e', marginLeft: '4px' }}>✓</span>}
+                                        </label>
+                                        <span style={{ fontSize: '12px', color: 'var(--muted)' }}>
+                                            {formData.message.length}/1000
+                                        </span>
+                                    </div>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        placeholder="Hello — how can I help?"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`form-input ${isFieldError('message') ? 'error' : ''} ${isFieldValid('message') ? 'valid' : ''}`}
+                                    ></textarea>
+                                    {isFieldError('message') && (
+                                        <span style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            ✗ {errors.message}
+                                        </span>
+                                    )}
+                                    {isFieldValid('message') && (
+                                        <span style={{ color: '#22c55e', fontSize: '12px', marginTop: '4px' }}>Great message!</span>
+                                    )}
+                                </div>
+
+                                <div className="submit-wrap" style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'flex-start' }}>
+                                    <button
+                                        className="btn-submit"
+                                        type="submit"
+                                        disabled={Object.keys(formData).some(key => !formData[key].trim())}
+                                        style={{
+                                            opacity: Object.keys(formData).some(key => !formData[key].trim()) ? 0.6 : 1,
+                                            cursor: Object.keys(formData).some(key => !formData[key].trim()) ? 'not-allowed' : 'pointer',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                    >
+                                        Send message
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </section>
             </main>
@@ -888,7 +959,34 @@ export default function Home() {
                                     const x = Math.cos((angle - 90) * Math.PI / 180) * radius
                                     const y = Math.sin((angle - 90) * Math.PI / 180) * radius
 
-                                    return (
+                                    return social.isEmail ? (
+                                        <button
+                                            key={idx}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                setShowEmailChooser(true)
+                                                setIsContactOpen(false)
+                                            }}
+                                            className="circular-item"
+                                            title={social.name}
+                                            style={{
+                                                '--x': `${x}px`,
+                                                '--y': `${y}px`,
+                                                animationDelay: `${idx * 0.06}s`,  // Faster stagger
+                                                background: 'none',
+                                                border: 'none',
+                                                padding: 0,
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            <div
+                                                className="item-icon"
+                                                style={{ background: social.color }}
+                                            >
+                                                {social.icon}
+                                            </div>
+                                        </button>
+                                    ) : (
                                         <a
                                             key={idx}
                                             href={social.url}
@@ -916,6 +1014,12 @@ export default function Home() {
                     </>
                 )
             }
+
+            <EmailChooser
+                isOpen={showEmailChooser}
+                onClose={() => setShowEmailChooser(false)}
+                emailAddress="tejrtej9347@gmail.com"
+            />
         </>
     )
 }

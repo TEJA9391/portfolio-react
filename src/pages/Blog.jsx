@@ -130,15 +130,34 @@ Particularly in Large Language Models (LLMs) and their ability to integrate tool
     ]
 
     const toggleReadMore = (idx) => {
-        setExpandedPost(expandedPost === idx ? null : idx)
+        const isExpanding = expandedPost !== idx
+        setExpandedPost(isExpanding ? idx : null)
+
+        if (isExpanding) {
+            // Scroll to bring the blog post into view when expanding
+            setTimeout(() => {
+                const element = document.getElementById(`blog-post-${idx}`)
+                if (element) {
+                    const yOffset = -100 // Offset from top (adjust for navbar)
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+                }
+            }, 100) // Small delay to let the expansion start
+        } else {
+            // Scroll to next blog post when collapsing
+            setTimeout(() => {
+                const nextIdx = idx + 1
+                const nextElement = document.getElementById(`blog-post-${nextIdx}`)
+                if (nextElement) {
+                    const yOffset = -100 // Offset from top (adjust for navbar)
+                    const y = nextElement.getBoundingClientRect().top + window.pageYOffset + yOffset
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+                }
+            }, 100) // Small delay to let the collapse complete
+        }
     }
 
-    const toggleGallery = (idx) => {
-        setVisibleGalleries(prev => ({
-            ...prev,
-            [idx]: !prev[idx]
-        }))
-    }
+
 
     const renderContent = (content) => {
         return content.split('**').map((part, index) =>
@@ -264,79 +283,115 @@ Particularly in Large Language Models (LLMs) and their ability to integrate tool
                 <div style={{ display: 'grid', gap: 24 }}>
                     {filteredPosts.map((post, idx) => (
                         <div
+                            id={`blog-post-${idx}`}
                             key={idx}
                             className="blog-card"
                             style={{ animationDelay: `${idx * 0.15}s` }}
                         >
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                                <h3 className="blog-title" style={{ margin: 0 }}>{post.title}</h3>
-                                <span style={{
-                                    padding: '4px 12px',
-                                    borderRadius: '12px',
-                                    background: 'rgba(59, 130, 246, 0.15)',
-                                    color: '#3b82f6',
-                                    fontSize: '11px',
-                                    fontWeight: 600,
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.5px',
-                                    whiteSpace: 'nowrap'
+                            {/* Image Gallery at Top - Only visible when expanded */}
+                            {expandedPost === idx && post.images && (
+                                <div className="image-gallery" style={{
+                                    animation: 'fadeIn 0.5s ease',
+                                    marginBottom: '24px',
+                                    paddingBottom: '24px',
+                                    borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
                                 }}>
-                                    {post.category}
-                                </span>
-                            </div>
-                            <p className="blog-date">{post.date}</p>
-
-                            {/* Image Gallery Toggle & Display */}
-                            {post.images && (
-                                <>
-                                    <button
-                                        onClick={() => toggleGallery(idx)}
-                                        className="view-photos-btn"
-                                        style={{
-                                            background: 'rgba(255, 255, 255, 0.05)',
-                                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                                            color: 'var(--text)',
-                                            padding: '8px 16px',
-                                            borderRadius: '8px',
-                                            cursor: 'pointer',
-                                            marginBottom: '16px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            fontSize: '0.9rem',
-                                            fontWeight: 500,
-                                            transition: 'all 0.3s ease'
-                                        }}
-                                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
-                                        onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'}
-                                    >
-                                        <span>{visibleGalleries[idx] ? '📸 Hide Photos' : '📸 View Photos'}</span>
-                                    </button>
-
-                                    {visibleGalleries[idx] && (
-                                        <div className="image-gallery" style={{ animation: 'fadeIn 0.5s ease' }}>
-                                            {post.images.map((img, imgIdx) => (
-                                                <div
-                                                    key={imgIdx}
-                                                    className="gallery-item"
-                                                    onClick={() => setSelectedImage(img)}
-                                                >
-                                                    <img
-                                                        src={img}
-                                                        alt={`${post.title} - Image ${imgIdx + 1}`}
-                                                        className="gallery-image"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
-                                            ))}
+                                    {post.images.map((img, imgIdx) => (
+                                        <div
+                                            key={imgIdx}
+                                            className="gallery-item"
+                                            onClick={() => setSelectedImage(img)}
+                                        >
+                                            <img
+                                                src={img}
+                                                alt={`${post.title} - Image ${imgIdx + 1}`}
+                                                className="gallery-image"
+                                                loading="lazy"
+                                            />
                                         </div>
-                                    )}
-                                </>
+                                    ))}
+                                </div>
                             )}
 
-                            <p className="blog-content">
-                                {expandedPost === idx ? renderContent(post.fullContent) : post.excerpt}
-                            </p>
+                            {/* Main content wrapper with enhanced thumbnail */}
+                            <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
+                                {/* Left side - Content */}
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8, gap: 8 }}>
+                                        <h3 className="blog-title" style={{ margin: 0, flex: 1 }}>{post.title}</h3>
+                                        <span style={{
+                                            padding: '4px 12px',
+                                            borderRadius: '12px',
+                                            background: 'rgba(59, 130, 246, 0.15)',
+                                            color: '#3b82f6',
+                                            fontSize: '11px',
+                                            fontWeight: 600,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.5px',
+                                            whiteSpace: 'nowrap'
+                                        }}>
+                                            {post.category}
+                                        </span>
+                                    </div>
+                                    <p className="blog-date">{post.date}</p>
+
+                                    <p className="blog-content" style={{ marginBottom: 0 }}>
+                                        {expandedPost === idx ? renderContent(post.fullContent) : post.excerpt}
+                                    </p>
+                                </div>
+
+                                {/* Right side - Enhanced Thumbnail (only visible when NOT expanded) */}
+                                {expandedPost !== idx && post.images && post.images[0] && (
+                                    <div style={{
+                                        width: '140px',
+                                        height: '140px',
+                                        flexShrink: 0,
+                                        borderRadius: '12px',
+                                        overflow: 'hidden',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                                        position: 'relative',
+                                        border: '2px solid rgba(59, 130, 246, 0.2)'
+                                    }}
+                                        onClick={() => setSelectedImage(post.images[0])}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.transform = 'scale(1.08) rotate(2deg)'
+                                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.transform = 'scale(1) rotate(0deg)'
+                                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'
+                                        }}
+                                    >
+                                        <img
+                                            src={post.images[0]}
+                                            alt={post.title}
+                                            style={{
+                                                width: '100%',
+                                                height: '100%',
+                                                objectFit: 'cover',
+                                                transition: 'transform 0.3s ease'
+                                            }}
+                                        />
+                                        {/* Gradient overlay for professional look */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            bottom: 0,
+                                            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))',
+                                            opacity: 0,
+                                            transition: 'opacity 0.3s ease',
+                                            pointerEvents: 'none'
+                                        }}
+                                            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                                            className="thumbnail-overlay"
+                                        />
+                                    </div>
+                                )}
+                            </div>
 
                             <button
                                 onClick={(e) => {

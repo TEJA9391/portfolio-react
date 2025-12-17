@@ -135,7 +135,31 @@ export default function Speaking() {
     ]
 
     const toggleProject = (id) => {
-        setExpandedProject(expandedProject === id ? null : id)
+        const isExpanding = expandedProject !== id
+        setExpandedProject(isExpanding ? id : null)
+
+        if (isExpanding) {
+            // Scroll to bring the project into view when expanding
+            setTimeout(() => {
+                const element = document.getElementById(`project-detail-${id}`)
+                if (element) {
+                    const yOffset = -100 // Offset from top (adjust for navbar)
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+                }
+            }, 100) // Small delay to let the expansion start
+        } else {
+            // Scroll to next project when collapsing
+            setTimeout(() => {
+                const nextId = id + 1
+                const nextElement = document.getElementById(`project-detail-${nextId}`)
+                if (nextElement) {
+                    const yOffset = -100 // Offset from top (adjust for navbar)
+                    const y = nextElement.getBoundingClientRect().top + window.pageYOffset + yOffset
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+                }
+            }, 100) // Small delay to let the collapse complete
+        }
     }
 
     return (
