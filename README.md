@@ -6,6 +6,16 @@ A modern, responsive portfolio website showcasing my journey as an AI/ML enthusi
 [![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.0.0-646CFF)](https://vitejs.dev/)
 
+## 🎉 Latest Updates
+
+### December 2025 - Enhanced UX & Visual Polish
+- ✨ **Ultra-Smooth Header Animations**: Added premium scroll animations with 0.7-0.8s transitions and luxurious cubic-bezier easing for a floating, elegant feel
+- 🎨 **Professional Color Scheme**: Replaced rainbow gradients with cohesive blue gradient theme for cleaner, more professional appearance
+- 💎 **Enhanced Backdrop Blur**: Dynamic blur effects that increase on scroll (5px → 12px in light mode, 16px in dark mode)
+- 🌊 **Refined Visual Elements**: Updated logo and profile ring with sophisticated blue gradients and softer shadows
+- ⚡ **Performance Optimizations**: Added `will-change` properties for smoother rendering
+
+
 ## ✨ Features
 
 ### 🎨 Modern Design
