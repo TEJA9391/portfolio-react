@@ -388,11 +388,11 @@ export default function Home() {
                                 <span className="tag">Python</span>
                                 <span className="tag">JavaScript</span>
                                 <span className="tag">React</span>
-                                <span className="tag">Flask</span>
+
                                 <span className="tag">TensorFlow</span>
                                 <span className="tag">Git & GitHub</span>
                                 <span className="tag">VS Code</span>
-                                <span className="tag">Antigravity</span>
+
                                 <span className="tag">MongoDB</span>
                                 <span className="tag">SQL</span>
                                 <span className="tag">OpenCV</span>

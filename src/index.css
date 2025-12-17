@@ -59,12 +59,20 @@ header {
     backdrop-filter: blur(5px);
     background: rgba(255, 255, 255, 0.6);
     border-bottom: 1.4px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.7s cubic-bezier(0.075, 0.82, 0.165, 1),
+        backdrop-filter 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.7s cubic-bezier(0.075, 0.82, 0.165, 1),
+        border-bottom 0.7s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: translateY(0);
+    will-change: transform, background, backdrop-filter;
 }
 
 header.scrolled {
-    background: rgba(255, 255, 255, 0.82);
-    box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(2, 6, 23, 0.08), 0 2px 8px rgba(2, 6, 23, 0.04);
+    border-bottom: 1.4px solid rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
 }
 
 header.scrolled .nav-wrap {
@@ -74,21 +82,31 @@ header.scrolled .nav-wrap {
 header.scrolled .logo {
     width: 30px;
     height: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 header.scrolled .brand .name {
     font-size: 14px;
 }
 
+header.scrolled .color-ring {
+    width: 36px;
+    height: 36px;
+}
+
 [data-theme="dark"] header.scrolled {
     background: rgba(10, 13, 18, 0.98);
-    box-shadow: 0 6px 20px rgba(2, 6, 23, 0.45);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(2, 6, 23, 0.5),
+        0 2px 8px rgba(59, 130, 246, 0.15),
+        0 0 40px rgba(59, 130, 246, 0.05);
+    border-bottom: 1.4px solid rgba(59, 130, 246, 0.2);
 }
 
 [data-theme="dark"] header {
     background: rgba(15, 20, 25, 0.95);
     border-bottom: 1.4px solid rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(8px);
 }
 
 .nav-wrap {
@@ -98,33 +116,34 @@ header.scrolled .brand .name {
     align-items: center;
     justify-content: space-between;
     padding: 14px 40px;
-    transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: padding 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px
+    gap: 12px;
+    transition: gap 0.7s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .logo {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(45deg,
-            #ff0000,
-            #ff7f00,
-            #ffff00,
-            #00ff00,
-            #0000ff,
-            #4b0082,
-            #9400d3,
-            #ff0000);
-    background-size: 400% 400%;
-    animation: flowingColors 8s linear infinite;
+    background: linear-gradient(135deg,
+            #3b82f6,
+            #60a5fa,
+            #93c5fd,
+            #dbeafe,
+            #93c5fd,
+            #60a5fa,
+            #3b82f6);
+    background-size: 200% 200%;
+    animation: flowingColors 6s ease-in-out infinite;
     display: inline-block;
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 2px 8px rgba(59, 130, 246, 0.2);
     flex-shrink: 0;
+    transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @keyframes flowingColors {
@@ -132,16 +151,27 @@ header.scrolled .brand .name {
         background-position: 0% 50%;
     }
 
+    50% {
+        background-position: 100% 50%;
+    }
+
     100% {
-        background-position: 400% 50%;
+        background-position: 0% 50%;
     }
 }
 
 [data-theme="dark"] .logo {
-    background: linear-gradient(45deg, #e8eaed, #60a5fa, #3b82f6, #1e40af, #0f1419, #60a5fa, #e8eaed);
-    background-size: 400% 400%;
-    animation: flowingColors 8s ease infinite;
-    box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg,
+            #1e40af,
+            #3b82f6,
+            #60a5fa,
+            #e8eaed,
+            #60a5fa,
+            #3b82f6,
+            #1e40af);
+    background-size: 200% 200%;
+    animation: flowingColors 6s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 2px 12px rgba(59, 130, 246, 0.3);
 }
 
 .color-ring {
@@ -153,13 +183,13 @@ header.scrolled .brand .name {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Gradient border effect using padding */
     padding: 3px;
-    /* Specific colors: Blue, Black, White, Related Blues */
-    background: linear-gradient(45deg, #000000, #3b82f6, #ffffff, #1e40af, #60a5fa, #000000);
-    background-size: 400% 400%;
-    animation: flowingColors 6s linear infinite;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    /* Professional blue gradient */
+    background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd, #60a5fa, #3b82f6);
+    background-size: 200% 200%;
+    animation: flowingColors 5s ease-in-out infinite;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.35), 0 2px 6px rgba(59, 130, 246, 0.2);
+    transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .color-ring::before {
@@ -191,7 +221,7 @@ header.scrolled .brand .name {
     font-weight: 700;
     letter-spacing: 0.2px;
     font-size: 15px;
-    transition: font-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: font-size 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 nav ul {
