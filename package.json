@@ -1,7 +1,7 @@
 {
     "name": "tejas-portfolio",
     "version": "1.0.0",
-    "homepage": "https://www.tejrtej.com",
+    "homepage": "https://tejrtej.com",
     "private": true,
     "type": "module",
     "scripts": {
