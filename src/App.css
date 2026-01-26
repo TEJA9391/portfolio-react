@@ -1,53 +1,8 @@
 /* Small App specific styles - Add as needed */
 
-/* Animated Color Ring */
-@keyframes colorFlow {
-    0% {
-        background-position: 0% 50%;
-    }
+/* Color ring styles moved to index.css */
 
-    100% {
-        background-position: 400% 50%;
-    }
-}
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.color-ring {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(45deg,
-            #ffffff,
-            #8f4eff,
-            #0062ff,
-            #1e40af,
-            #000000,
-            #4e00d4,
-            #669ef9,
-            #ffffff);
-    background-size: 400% 400%;
-    animation: colorFlow 8s linear infinite, rotate 4s linear infinite;
-    position: relative;
-    box-shadow: 0 0 20px rgba(11, 87, 208, 0.901);
-}
-
-.color-ring::before {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    border-radius: 50%;
-    background: var(--bg);
-    z-index: 1;
-}
 
 @keyframes navLinkPulse {
     0% {
