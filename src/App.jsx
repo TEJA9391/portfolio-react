@@ -20,7 +20,7 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
 
         // Update page title based on route
         const pageTitles = {
-            '/': 'BOORA RAVITEJA - AI/ML Developer & Full-Stack Architect',
+            '/': 'BOORA RAVITEJA',
             '/about': 'About - BOORA RAVITEJA',
             '/events': 'Events - BOORA RAVITEJA',
             '/projects': 'Projects - BOORA RAVITEJA',
@@ -28,7 +28,7 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
             '/student-aware': 'Student Aware - BOORA RAVITEJA'
         }
 
-        document.title = pageTitles[location.pathname] || 'BOORA RAVITEJA - Portfolio'
+        document.title = pageTitles[location.pathname] || 'BOORA RAVITEJA'
     }, [location.pathname])
 
     useEffect(() => {
