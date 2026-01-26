@@ -54,6 +54,12 @@
         document.body.appendChild(div);
         return false;
     };
+    window.addEventListener('unhandledrejection', function (event) {
+        var div = document.createElement('div');
+        div.style.cssText = 'position:fixed; top:50%; left:0; width:100%; background:white; color:red; padding:20px; z-index:999999; border-top:2px solid red;';
+        div.innerHTML = '<h1>💥 PROMISE ERROR 💥</h1><h3>' + (event.reason ? event.reason.toString() : 'Unknown Promise Error') + '</h3>';
+        document.body.appendChild(div);
+    });
 </script>
 
 <body>
