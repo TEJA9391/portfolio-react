@@ -98,7 +98,7 @@ export default function Speaking() {
                 'Dispute resolution and customer support integration'
             ],
             github: 'https://github.com/TEJA9391/FixHub',
-            demo: 'https://fix-eflsmdp7t-tejas-projects-8508e785.vercel.app',
+            demo: 'https://teja9391.github.io/FixHub/',
             image: FixHubImg,
             techStack: 'React 18, Node.js, Express.js, MongoDB, Firebase, Socket.io, Stripe API, Vercel, REST API',
             achievements: 'Successfully deployed platform handling 500+ service requests with 4.8/5 average satisfaction rating'

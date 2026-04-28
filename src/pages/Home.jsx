@@ -122,7 +122,7 @@ export default function Home() {
             tags: ['React', 'Node.js', 'MongoDB', 'Firebase'],
             features: ['Real-time messaging system', 'Provider ratings & reviews', 'Secure payment integration', 'Service booking management', 'GPS-based provider matching'],
             github: 'https://github.com/TEJA9391/FixHub',
-            demo: 'https://fix-eflsmdp7t-tejas-projects-8508e785.vercel.app',
+            demo: 'https://teja9391.github.io/FixHub/',
             image: FixHubImg
         },
         {
