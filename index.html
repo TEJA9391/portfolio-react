@@ -40,8 +40,8 @@
     <!-- Favicon -->
     <!-- Favicon -->
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png?v=8" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png?v=8" />
+    <link rel="icon" type="image/png" href="./favicon.png?v=8" />
+    <link rel="shortcut icon" type="image/png" href="./favicon.png?v=8" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -69,7 +69,18 @@
             Loading Portfolio...
         </div>
     </div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script>
+        // Catch script loading errors specifically
+        window.addEventListener('error', function(event) {
+            if (event.target.tagName === 'SCRIPT') {
+                var div = document.createElement('div');
+                div.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:white; color:red; padding:20px; z-index:999999; overflow:auto;';
+                div.innerHTML = '<h1>❌ SCRIPT LOAD ERROR ❌</h1><p>Failed to load: <strong>' + event.target.src + '</strong></p><p>Check if the file exists and the path is correct.</p>';
+                document.body.appendChild(div);
+            }
+        }, true);
+    </script>
+    <script type="module" src="./src/main.jsx"></script>
 </body>
 
 </html>

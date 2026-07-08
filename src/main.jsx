@@ -19,10 +19,17 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
 // Debug log to confirm script execution
 console.log('🚀 App Starting...');
 
-createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <ErrorBoundary>
-            <App />
-        </ErrorBoundary>
-    </React.StrictMode>
-)
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+    console.error('💥 Failed to find root element!');
+} else {
+    console.log('✅ Root element found, rendering...');
+    const root = createRoot(rootElement);
+    root.render(
+        <React.StrictMode>
+            <ErrorBoundary>
+                <App />
+            </ErrorBoundary>
+        </React.StrictMode>
+    );
+}
