@@ -6,6 +6,7 @@ import BlockchainImg from '../assets/blockchain.png'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
 import SentimentImg from '../assets/sentiment.png'
+import NetcatThumb from '../assets/netcat-thumb.png'
 import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaFacebook, FaEnvelope } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import EmailChooser from '../components/EmailChooser'
@@ -135,6 +136,19 @@ export default function Home() {
             github: '#',
             demo: '#',
             image: SentimentImg
+        },
+        {
+            id: 5,
+            title: 'Cross-Device Private Chat using Netcat',
+            shortDesc: 'Real-time private chat system using Netcat between Ubuntu VM and Android Termux over TCP. Demonstrates client-server architecture, port listening, and cross-platform networking.',
+            fullDesc: 'A hands-on cybersecurity project implementing a bidirectional TCP chat between an Ubuntu Linux Virtual Machine (inside VirtualBox) and Android Termux using Netcat — the classic networking utility. The Ubuntu VM listens on a specific port; the Android device connects as a client over the local network, enabling real-time message exchange.',
+            tags: ['Netcat', 'TCP/IP', 'Ubuntu Linux', 'Termux', 'Cybersecurity'],
+            features: ['Netcat listener configured on Ubuntu inside VirtualBox', 'TCP client from Android Termux', 'Real-time bidirectional communication', 'Cross-platform networking (Linux ↔ Android)', 'Understanding of raw socket security implications'],
+            github: '#',
+            demo: '#',
+            image: NetcatThumb,
+            detailRoute: '/projects/netcat',
+            isCyberSec: true
         }
     ]
 
@@ -735,7 +749,7 @@ export default function Home() {
                                             )}
                                             <Link
                                                 className="btn btn-primary"
-                                                to={`/projects?project=${project.id}`}
+                                                to={project.detailRoute || `/projects?project=${project.id}`}
                                                 style={{ cursor: 'pointer', textDecoration: 'none' }}
                                             >
                                                 Learn more →

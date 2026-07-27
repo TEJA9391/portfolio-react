@@ -9,6 +9,7 @@ import Blog from './pages/Blog'
 import Speaking from './pages/Speaking'
 import Contact from './pages/Contact'
 import StudentAware from "./pages/StudentAware";
+import NetcatProject from './pages/NetcatProject'
 import './App.css'
 import './index.css'
 
@@ -52,6 +53,7 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
 
                 {/* ✅ ADD THIS ROUTE */}
                 <Route path="/student-aware" element={<StudentAware />} />
+                <Route path="/projects/netcat" element={<NetcatProject />} />
             </Routes>
 
             <Footer />
