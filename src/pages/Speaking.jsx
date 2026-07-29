@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import BlockchainImg from '../assets/blockchain.png'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
 import IntelliAttendImg from '../assets/intelliattend.png'
 import ThreatMatrixImg from '../assets/threatmatrix.png'
+import SentimentImg from '../assets/sentiment.png'
+import NetcatThumb from '../assets/netcat-thumb.png'
 
 export default function Speaking() {
     const [searchParams] = useSearchParams()
+    const navigate = useNavigate()
     const [expandedProject, setExpandedProject] = useState(null)
 
     // Auto-expand project from URL parameter
@@ -145,7 +148,35 @@ export default function Speaking() {
             demo: 'https://teja9391.github.io/ThreatMatrix-AI/',
             image: ThreatMatrixImg,
             techStack: 'React 18, Tailwind CSS, Lucide Icons, Recharts, Framer Motion, Python Flask',
-            achievements: 'Developed an advanced SOC dashboard with real-time neural visualization.'
+            achievements: 'Developed an advanced SOC dashboard with real-time neural visualization.',
+            image: SentimentImg,
+            techStack: 'Python 3.x, Flask, React 18, NLTK, spaCy, Transformers, BERT, scikit-learn, pandas, D3.js',
+            achievements: 'Processed 10,000+ text samples with 89% accuracy using fine-tuned BERT models'
+        },
+        {
+            id: 5,
+            title: 'Cross-Device Private Chat using Netcat',
+            shortDesc: 'A real-time private chat system using Netcat between an Ubuntu Virtual Machine and Android Termux over a TCP network — demonstrating TCP communication, port listening, and client-server architecture across two different platforms.',
+            fullDesc: 'This hands-on cybersecurity project implements a fully functional, bidirectional private chat system using Netcat — the foundational networking utility often called the "Swiss army knife" of networking. The setup involves an Ubuntu Linux VM running inside VirtualBox (Bridged networking mode) as the server side, and an Android device using the Termux terminal emulator as the client. The Ubuntu VM is configured to listen on a specified TCP port using the nc -lvp command. The Android Termux app then connects to the VM\'s local IP address on that port using nc <ip> <port>. Once the TCP connection is established, any text typed on either terminal is immediately transmitted to the other device, creating a real-time, raw bidirectional chat channel. This project provides practical, first-principles insight into how TCP connections work, what raw socket communication looks like, and why encryption (like SSH/TLS) is essential in real-world applications.',
+            tags: ['Netcat', 'TCP/IP', 'Ubuntu Linux', 'VirtualBox', 'Android Termux', 'Cybersecurity', 'Networking'],
+            features: [
+                'Configured Netcat listener (nc -lvp) on Ubuntu Linux inside VirtualBox (Bridged network mode)',
+                'Established client connection from Android Termux using nc <ip> <port>',
+                'Real-time bidirectional TCP communication — messages flow in both directions',
+                'Cross-platform networking: Linux VM to Android device on same LAN',
+                'Understanding of VirtualBox NAT vs Bridged networking and when each is needed',
+                'Practical demonstration of raw TCP socket communication',
+                'Insight into why encryption matters — Netcat sends data in plaintext',
+                'Hands-on experience with Linux terminal commands and port management',
+                'Understanding of firewall rules and how they affect port accessibility'
+            ],
+            github: '#',
+            demo: '#',
+            image: NetcatThumb,
+            techStack: 'Ubuntu Linux, VirtualBox (Bridged Networking), Netcat (nc), Android Termux, TCP/IP Protocol',
+            achievements: 'Successfully established live cross-device TCP chat; gained hands-on experience in networking fundamentals and cybersecurity concepts',
+            detailRoute: '/projects/netcat',
+            isCyberSec: true
         }
     ]
 
@@ -348,9 +379,22 @@ export default function Speaking() {
 
                                 {/* Action Buttons */}
                                 <div className="buttons" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                                    <a className="btn btn-ghost" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
+                                    <a className="btn btn-ghost" href={project.github} target="_blank" rel="noreferrer"
+                                        style={{ opacity: project.github === '#' ? 0.5 : 1, pointerEvents: project.github === '#' ? 'none' : 'auto', cursor: project.github === '#' ? 'not-allowed' : 'pointer' }}
+                                    >
+                                        {project.github === '#' ? 'Private' : 'GitHub'}
+                                    </a>
                                     {project.demo && project.demo !== '#' && (
                                         <a className="btn btn-ghost" href={project.demo} target="_blank" rel="noreferrer">Live Demo</a>
+                                    )}
+                                    {project.detailRoute && (
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={() => navigate(project.detailRoute)}
+                                            style={{ cursor: 'pointer', background: 'linear-gradient(135deg, #16a34a, #22c55e)', border: 'none' }}
+                                        >
+                                            🛡️ View Full Details →
+                                        </button>
                                     )}
                                     <button
                                         className="btn btn-primary"
@@ -376,3 +420,4 @@ export default function Speaking() {
         </main>
     )
 }
+
