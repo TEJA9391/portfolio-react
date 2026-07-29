@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import BlockchainImg from '../assets/blockchain.png'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
-import SentimentImg from '../assets/sentiment.png'
+import IntelliAttendImg from '../assets/intelliattend.png'
+import ThreatMatrixImg from '../assets/threatmatrix.png'
 
 export default function Speaking() {
     const [searchParams] = useSearchParams()
@@ -104,33 +105,47 @@ export default function Speaking() {
             achievements: 'Successfully deployed platform handling 500+ service requests with 4.8/5 average satisfaction rating'
         },
         {
-            id: 4,
-            title: 'Sentiment Analysis Web App',
-            shortDesc: 'Advanced NLP-powered sentiment analysis platform utilizing state-of-the-art transformer models and deep learning for real-time emotion classification, multi-language support, and comprehensive text analytics with enterprise-grade API integration.',
-            fullDesc: 'A cutting-edge Natural Language Processing application that leverages advanced machine learning models including BERT, RoBERTa, and custom-trained sentiment classifiers to provide accurate, real-time sentiment analysis across multiple languages and text formats. The Flask-powered backend implements sophisticated NLP pipelines with NLTK and spaCy for text preprocessing, tokenization, and feature extraction, while the React frontend delivers an intuitive interface for both individual and batch text analysis. The system performs multi-class sentiment classification (positive, negative, neutral) with confidence scores, emotion detection (joy, sadness, anger, fear, surprise), aspect-based sentiment analysis for product reviews, and entity-level sentiment extraction. Features include interactive data visualizations using D3.js and Chart.js, comprehensive sentiment trend analysis, real-time processing with sub-second response times, and a robust RESTful API for seamless integration into external applications. The platform supports batch processing of large datasets, export functionality for analytics reports, and customizable model fine-tuning for domain-specific applications.',
-            tags: ['Python', 'NLP', 'Flask', 'React', 'BERT', 'Transformers', 'NLTK', 'spaCy'],
+            id: 5,
+            title: 'IntelliAttend: Faculty Mobile Hub',
+            shortDesc: 'The Command Center for Modern Classroom Attendance. A professional Flutter application for faculty members of the IntelliAttend ecosystem.',
+            fullDesc: 'The professional Flutter application for faculty members of the IntelliAttend ecosystem. It provides the tools to launch sessions, manage students, and monitor attendance integrity in real-time. The application features Session Orchestration with high-security handshake with classroom SmartBoards via 6-digit OTP, a Real-Time Live Monitor (Pulse-based dashboard showing students as they turn "Green" upon successful verification), and Sophisticated Analytics (Modular reports for student eligibility, attendance trends, and defaulter tracking). The UI is built with fluid animations, glassmorphism UI components, and a premium "Slide-to-Scan" haptic interface.',
+            tags: ['Flutter', 'Mobile', 'Dart', 'Security', 'State Management'],
             features: [
-                'Real-time sentiment analysis with transformer-based models (BERT, RoBERTa)',
-                'Multi-class emotion detection (joy, sadness, anger, fear, surprise, disgust)',
-                'Multi-language support (English, Spanish, French, German, and more)',
-                'Aspect-based sentiment analysis for product and service reviews',
-                'Entity-level sentiment extraction and analysis',
-                'Batch processing for analyzing large text datasets (CSV, JSON, TXT)',
-                'Interactive sentiment visualization with charts and word clouds',
-                'Sentiment trend analysis and historical comparison',
-                'Confidence scoring and prediction reliability metrics',
-                'RESTful API with authentication for third-party integration',
-                'Text preprocessing with NLTK and spaCy (tokenization, lemmatization)',
-                'Support for social media text analysis (Twitter, Reddit)',
-                'Export results in multiple formats (PDF, CSV, JSON)',
-                'Custom model fine-tuning for domain-specific applications',
-                'Real-time performance metrics and model accuracy tracking'
+                'Session Orchestration with SmartBoards via 6-digit OTP',
+                'Real-Time Live Monitor showing verified students in pulse-based dashboard',
+                'Sophisticated Analytics for student eligibility and trends',
+                'Defaulter tracking and modular reports',
+                'Modern UX with fluid animations and glassmorphism',
+                'Premium "Slide-to-Scan" haptic interface',
+                'Real-time Light/Dark mode syncing theme engine',
+                'Encrypted JSON persistence for session data',
+                'Modular Controller Pattern (Reports, Dashboard) for state management',
+                'Segmented tab components for Analytics, Eligibility, and Defaulters'
             ],
-            github: '#',
+            github: 'https://github.com/TEJA9391/IntelliAttend-Faculty-Mobile-App',
             demo: '#',
-            image: SentimentImg,
-            techStack: 'Python 3.x, Flask, React 18, NLTK, spaCy, Transformers, BERT, scikit-learn, pandas, D3.js',
-            achievements: 'Processed 10,000+ text samples with 89% accuracy using fine-tuned BERT models'
+            image: IntelliAttendImg,
+            techStack: 'Flutter (Stable), Dart, Encrypted Local Storage',
+            achievements: 'Built high-security handshake protocol via 6-digit OTP and live pulse-based monitor dashboard'
+        },
+        {
+            id: 6,
+            title: 'ThreatMatrix AI: Advanced SOC Mainnet',
+            shortDesc: 'A production-grade Security Operations Center (SOC) platform designed for real-time threat intelligence, neural visualization, and autonomous mitigation.',
+            fullDesc: 'ThreatMatrix AI is a production-grade Security Operations Center (SOC) platform designed for real-time threat intelligence, neural visualization, and autonomous mitigation. It features a Neural Intelligence Mesh for high-fidelity visualization of global threat ingress, Autonomous Mitigation with real-time auto-blocking of malicious IPs, and Multi-Vector Detection for Fraud, Phishing, and Fake News identification.',
+            tags: ['React 18', 'Tailwind CSS', 'Python', 'Flask', 'Security'],
+            features: [
+                'Neural Intelligence Mesh for global threat visualization',
+                'Autonomous Mitigation for real-time IP auto-blocking',
+                'Multi-Vector Detection (Fraud, Phishing, Fake News)',
+                'Immersive Cyberpunk aesthetic with glassmorphism',
+                'Fluid Framer Motion transitions'
+            ],
+            github: 'https://github.com/TEJA9391/ThreatMatrix-AI',
+            demo: 'https://teja9391.github.io/ThreatMatrix-AI/',
+            image: ThreatMatrixImg,
+            techStack: 'React 18, Tailwind CSS, Lucide Icons, Recharts, Framer Motion, Python Flask',
+            achievements: 'Developed an advanced SOC dashboard with real-time neural visualization.'
         }
     ]
 

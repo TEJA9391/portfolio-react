@@ -85,7 +85,7 @@ export default function Contact() {
 
                             <div className="contact-actions">
                                 <a
-                                    href="/resume.pdf"
+                                    href="/resume.pdf?v=2"
                                     download
                                     className="btn-resume"
                                 >

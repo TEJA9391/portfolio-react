@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/Navbar'
 import BackToTop from './components/BackToTop'
 import Footer from './components/Footer'
@@ -60,6 +61,7 @@ function AppContent({ isDarkMode, setIsDarkMode }) {
 }
 
 export default function App() {
+    const [isLoading, setIsLoading] = useState(true)
     const [isDarkMode, setIsDarkMode] = useState(() => {
         const saved = localStorage.getItem('theme')
         if (saved) {
@@ -79,6 +81,7 @@ export default function App() {
 
     return (
         <Router>
+            {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
             <AppContent isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         </Router>
     )

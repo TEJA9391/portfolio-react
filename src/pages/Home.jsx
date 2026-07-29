@@ -5,7 +5,8 @@ import TejImg from '../assets/tej.jpg'
 import BlockchainImg from '../assets/blockchain.png'
 import EmotionStudyImg from '../assets/emotion-study.png'
 import FixHubImg from '../assets/fixhub.png'
-import SentimentImg from '../assets/sentiment.png'
+import IntelliAttendImg from '../assets/intelliattend.png'
+import ThreatMatrixImg from '../assets/threatmatrix.png'
 import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaFacebook, FaEnvelope } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import EmailChooser from '../components/EmailChooser'
@@ -18,6 +19,14 @@ export default function Home() {
     const [submitted, setSubmitted] = useState(false)
     const [isContactOpen, setIsContactOpen] = useState(false)
     const [isAnimating, setIsAnimating] = useState(false)
+    const [titleIndex, setTitleIndex] = useState(0)
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setTitleIndex(prev => (prev + 1) % 4)
+        }, 6000)
+        return () => clearInterval(interval)
+    }, [])
     const [flyStyle, setFlyStyle] = useState(null)
     const [expandedProject, setExpandedProject] = useState(null)
     const [showEmailChooser, setShowEmailChooser] = useState(false)
@@ -126,15 +135,32 @@ export default function Home() {
             image: FixHubImg
         },
         {
-            id: 4,
-            title: 'Sentiment Analysis Web App',
-            shortDesc: 'Web-based sentiment analysis tool using NLP to classify text emotions. Built with Flask backend and React frontend with real-time predictions.',
-            fullDesc: 'A sophisticated NLP application that analyzes text sentiment in real-time. Uses pre-trained models to classify emotions and provide detailed sentiment scores. Features include batch processing, visualization of results, and API integration capabilities for external applications.',
-            tags: ['Python', 'NLP', 'Flask', 'React'],
-            features: ['Real-time sentiment analysis', 'Multi-language support', 'Sentiment visualization charts', 'Batch processing capability', 'REST API for integration'],
-            github: '#',
+            id: 5,
+            title: 'IntelliAttend: Faculty Mobile Hub',
+            shortDesc: 'The Command Center for Modern Classroom Attendance. A professional Flutter application for faculty members to launch sessions and manage students.',
+            fullDesc: 'The professional Flutter application for faculty members of the IntelliAttend ecosystem. It provides the tools to launch sessions, manage students, and monitor attendance integrity in real-time. Features Session Orchestration with high-security handshake via 6-digit OTP, Real-Time Live Monitor showing verified students, and Sophisticated Analytics.',
+            tags: ['Flutter', 'Mobile', 'Dart', 'Security'],
+            features: ['Session Orchestration with SmartBoards via 6-digit OTP', 'Real-Time Live Monitor for student verification', 'Sophisticated Analytics for student eligibility and trends', 'Modern UX with fluid animations and haptic interface', 'Encrypted JSON persistence for local storage'],
+            github: 'https://github.com/TEJA9391/IntelliAttend-Faculty-Mobile-App',
             demo: '#',
-            image: SentimentImg
+            image: IntelliAttendImg
+        },
+        {
+            id: 6,
+            title: 'ThreatMatrix AI: Advanced SOC Mainnet',
+            shortDesc: 'A production-grade Security Operations Center (SOC) platform designed for real-time threat intelligence, neural visualization, and autonomous mitigation.',
+            fullDesc: 'ThreatMatrix AI is a production-grade Security Operations Center (SOC) platform designed for real-time threat intelligence, neural visualization, and autonomous mitigation. It features a Neural Intelligence Mesh for high-fidelity visualization of global threat ingress, Autonomous Mitigation with real-time auto-blocking of malicious IPs, and Multi-Vector Detection for Fraud, Phishing, and Fake News identification.',
+            tags: ['React', 'Tailwind', 'Python', 'Security'],
+            features: [
+                'Neural Intelligence Mesh for global threat visualization',
+                'Autonomous Mitigation for real-time IP auto-blocking',
+                'Multi-Vector Detection (Fraud, Phishing, Fake News)',
+                'Immersive Cyberpunk aesthetic with glassmorphism',
+                'Fluid Framer Motion transitions'
+            ],
+            github: 'https://github.com/TEJA9391/ThreatMatrix-AI',
+            demo: 'https://teja9391.github.io/ThreatMatrix-AI/',
+            image: ThreatMatrixImg
         }
     ]
 
@@ -238,19 +264,36 @@ export default function Home() {
                     <div className="hero-left fade-in">
                         <div className="headline-wrap">
                             <h1 className="headline">
-                                I am
-                                <div className="text-cube">
-                                    <div className="text-cube-inner">
-                                        <div className="text-face front" style={{ color: 'var(--text)' }}> T<span style={{ color: '#3b82f6' }}>ej</span>a</div>
-                                        <div className="text-face second"> Developer</div>
-                                        <div className="text-face third"> Student</div>
-                                        <div className="text-face fourth"> Creator</div>
-                                    </div>
+                                <div style={{ width: '100%', height: '60px', position: 'relative' }}>
+                                    {[
+                                        <div key={0}>Hi, I'm <span style={{ color: '#3b82f6' }}>Boora Raviteja</span></div>,
+                                        <div key={1}><span style={{ color: '#3b82f6' }}>AI</span> & ML <span style={{ color: '#3b82f6' }}>Student</span></div>,
+                                        <div key={2}>Intelligent Software with <span style={{ color: '#3b82f6' }}>AI</span></div>,
+                                        <div key={3}><span style={{ color: '#3b82f6' }}>AI Developer</span></div>
+                                    ].map((title, idx) => (
+                                        <div 
+                                            key={idx}
+                                            style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                width: '100%',
+                                                color: 'var(--text)',
+                                                whiteSpace: 'nowrap',
+                                                opacity: titleIndex === idx ? 1 : 0,
+                                                transform: titleIndex === idx ? 'translateY(0)' : (titleIndex < idx ? 'translateY(10px)' : 'translateY(-10px)'),
+                                                transition: 'opacity 2.0s ease-in-out, transform 2.0s ease-in-out',
+                                                pointerEvents: titleIndex === idx ? 'auto' : 'none'
+                                            }}
+                                        >
+                                            {title}
+                                        </div>
+                                    ))}
                                 </div>
                             </h1>
                         </div>
 
-                        <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontWeight: 400 }}>AI/ML Alchemist & Full-Stack Architect</p>
+                        <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontWeight: 400 }}>AI & Machine Learning Student | Full-Stack Developer | Building Intelligent Digital Solutions</p>
                     </div>
 
                     <div className="photo-column fade-in delay">
@@ -260,10 +303,10 @@ export default function Home() {
                     </div>
 
                     <div className="hero-right fade-in">
-                        <p className="desc">Domain Expansion: Infinite Full-Stack Development. <br /> Manifesting intelligent solutions through React, Python, and the infinite potential of ML.</p>
+                        <p className="desc">Passionate AI & ML student and Full-Stack Developer dedicated to building intelligent, scalable, and user-centric applications. Experienced in React, Python, Java, Flutter, SQL, and Machine Learning with a strong passion for solving real-world problems through technology.</p>
 
                         <div style={{ marginTop: 12, display: 'flex', gap: 10, justifyContent: 'flex-start' }}>
-                            <a className="btn btn-ghost" href="/BOORA%20RAVITEJA.pdf" target="_blank" rel="noopener noreferrer" title="View Resume">Resume ↗</a>
+                            <a className="btn btn-ghost" href="/resume.pdf?v=2" target="_blank" rel="noopener noreferrer" title="View Resume">Resume ↗</a>
                             <button
                                 ref={contactBtnRef}
                                 className="btn btn-primary"
@@ -378,26 +421,29 @@ export default function Home() {
                     <div className="about-grid">
                         <div className="about-left card">
                             <p style={{ margin: '0 0 8px 0', color: 'var(--muted)' }}>Role</p>
-                            <h4 style={{ margin: '0 0 10px 0' }}>Neural Architect & Code Craftsman</h4>
-                            <p style={{ margin: 0, color: 'var(--muted)' }}>Forging the convergence of artificial intelligence and full-stack mastery to architect next-generation intelligent systems. Transforming complex challenges into elegant, ML-powered solutions.</p>
+                            <h4 style={{ margin: '0 0 10px 0' }}>AI & ML Student | Full-Stack Developer</h4>
+                            <p style={{ margin: 0, color: 'var(--muted)' }}>I am a passionate B.Tech Computer Science student specializing in AI & ML. I enjoy designing intelligent, scalable, and user-friendly software solutions that solve real-world problems.</p>
                         </div>
 
                         <div className="about-right card">
                             <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>Skills & Technologies</p>
                             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                                 <span className="tag">Python</span>
+                                <span className="tag">Java</span>
                                 <span className="tag">JavaScript</span>
-                                <span className="tag">React</span>
-
-                                <span className="tag">TensorFlow</span>
-                                <span className="tag">Git & GitHub</span>
-                                <span className="tag">VS Code</span>
-
-                                <span className="tag">MongoDB</span>
+                                <span className="tag">React.js</span>
+                                <span className="tag">Flutter</span>
+                                <span className="tag">HTML5</span>
+                                <span className="tag">CSS3</span>
                                 <span className="tag">SQL</span>
-                                <span className="tag">OpenCV</span>
-                                <span className="tag">Model Training</span>
-                                <span className="tag">Classification Models</span>
+                                <span className="tag">Machine Learning</span>
+                                <span className="tag">Artificial Intelligence</span>
+                                <span className="tag">Git & GitHub</span>
+                                <span className="tag">REST APIs</span>
+                                <span className="tag">Firebase</span>
+                                <span className="tag">Node.js</span>
+                                <span className="tag">Material UI</span>
+                                <span className="tag">VS Code</span>
                             </div>
                         </div>
                     </div>
@@ -432,7 +478,7 @@ export default function Home() {
                             if (rightBtn) rightBtn.style.opacity = '0'
                         }}
                     >
-                        {/* Left Scroll Button - Netflix Style */}
+                        {/* Left Scroll Button */}
                         <button
                             className="scroll-btn-left"
                             onClick={() => scrollProjects('left')}
@@ -442,34 +488,41 @@ export default function Home() {
                                 top: '50%',
                                 transform: 'translateY(-50%)',
                                 zIndex: 10,
-                                background: 'rgba(0, 0, 0, 0.8)',
-                                border: 'none',
-                                borderRadius: '4px',
-                                width: '50px',
-                                height: '100px',
+                                background: 'var(--card-bg)',
+                                backdropFilter: 'blur(12px)',
+                                WebkitBackdropFilter: 'blur(12px)',
+                                border: '1px solid var(--border)',
+                                borderRadius: '50%',
+                                width: '48px',
+                                height: '48px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 cursor: 'pointer',
-                                color: 'white',
-                                fontSize: '32px',
-                                fontWeight: 'bold',
+                                color: 'var(--text)',
+                                fontSize: '28px',
                                 opacity: 0,
-                                transition: 'opacity 0.3s ease, background 0.2s ease',
-                                boxShadow: '2px 0 8px rgba(0, 0, 0, 0.5)'
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)'
                             }}
                             onMouseEnter={(e) => {
-                                e.target.style.background = 'rgba(0, 0, 0, 0.95)'
+                                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'
+                                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.25)'
+                                e.currentTarget.style.color = 'var(--accent)'
                             }}
                             onMouseLeave={(e) => {
-                                e.target.style.background = 'rgba(0, 0, 0, 0.8)'
+                                e.currentTarget.style.transform = 'translateY(-50%) scale(1)'
+                                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.15)'
+                                e.currentTarget.style.color = 'var(--text)'
                             }}
                             title="Scroll left"
                         >
-                            ‹
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ pointerEvents: 'none' }}>
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
                         </button>
 
-                        {/* Right Scroll Button - Netflix Style */}
+                        {/* Right Scroll Button */}
                         <button
                             className="scroll-btn-right"
                             onClick={() => scrollProjects('right')}
@@ -479,31 +532,38 @@ export default function Home() {
                                 top: '50%',
                                 transform: 'translateY(-50%)',
                                 zIndex: 10,
-                                background: 'rgba(0, 0, 0, 0.8)',
-                                border: 'none',
-                                borderRadius: '4px',
-                                width: '50px',
-                                height: '100px',
+                                background: 'var(--card-bg)',
+                                backdropFilter: 'blur(12px)',
+                                WebkitBackdropFilter: 'blur(12px)',
+                                border: '1px solid var(--border)',
+                                borderRadius: '50%',
+                                width: '48px',
+                                height: '48px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 cursor: 'pointer',
-                                color: 'white',
-                                fontSize: '32px',
-                                fontWeight: 'bold',
+                                color: 'var(--text)',
+                                fontSize: '28px',
                                 opacity: 0,
-                                transition: 'opacity 0.3s ease, background 0.2s ease',
-                                boxShadow: '-2px 0 8px rgba(0, 0, 0, 0.5)'
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)'
                             }}
                             onMouseEnter={(e) => {
-                                e.target.style.background = 'rgba(0, 0, 0, 0.95)'
+                                e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'
+                                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.25)'
+                                e.currentTarget.style.color = 'var(--accent)'
                             }}
                             onMouseLeave={(e) => {
-                                e.target.style.background = 'rgba(0, 0, 0, 0.8)'
+                                e.currentTarget.style.transform = 'translateY(-50%) scale(1)'
+                                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.15)'
+                                e.currentTarget.style.color = 'var(--text)'
                             }}
                             title="Scroll right"
                         >
-                            ›
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ pointerEvents: 'none' }}>
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
                         </button>
 
                         <div
@@ -533,26 +593,32 @@ export default function Home() {
                                         maxWidth: '350px',
                                         flexShrink: 0,
                                         scrollSnapAlign: 'start',
+                                        background: 'var(--card-bg)',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '20px',
+                                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
                                         filter: project.id === 4
                                             ? 'blur(2px)'
-                                            : (hoveredProject && hoveredProject !== project.id ? 'blur(1.5px) brightness(0.85)' : 'none'),
+                                            : (hoveredProject && hoveredProject !== project.id ? 'blur(2px) brightness(0.9)' : 'none'),
                                         opacity: project.id === 4 ? 0.6 : 1,
-                                        transition: 'transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease',
+                                        transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                                         cursor: 'pointer'
                                     }}
                                     onMouseEnter={(e) => {
                                         if (project.id !== 4) {
                                             setHoveredProject(project.id)
-                                            e.currentTarget.style.transform = 'scale(1.05)'
-                                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.3)'
+                                            e.currentTarget.style.transform = 'translateY(-10px) scale(1.02)'
+                                            e.currentTarget.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.15)'
+                                            e.currentTarget.style.borderColor = 'var(--accent)'
                                             e.currentTarget.style.zIndex = '5'
                                         }
                                     }}
                                     onMouseLeave={(e) => {
                                         if (project.id !== 4) {
                                             setHoveredProject(null)
-                                            e.currentTarget.style.transform = 'scale(1)'
-                                            e.currentTarget.style.boxShadow = ''
+                                            e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                                            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)'
+                                            e.currentTarget.style.borderColor = 'var(--border)'
                                             e.currentTarget.style.zIndex = '1'
                                         }
                                     }}
@@ -647,11 +713,11 @@ export default function Home() {
                                     )}
                                     <div style={{ padding: '16px' }}>
                                         <h4 style={{
-                                            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05))',
-                                            padding: '8px 12px',
-                                            borderRadius: '6px',
-                                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                                            marginBottom: '12px'
+                                            fontSize: '18px',
+                                            fontWeight: 700,
+                                            margin: '0 0 8px 0',
+                                            color: 'var(--text)',
+                                            letterSpacing: '-0.3px'
                                         }}>{project.title}</h4>
                                         <p style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>{project.shortDesc}</p>
 
@@ -711,7 +777,7 @@ export default function Home() {
                                             ))}
                                         </div>
 
-                                        <div className="buttons" style={{ marginTop: 12, display: 'flex', gap: 10 }}>
+                                        <div className="buttons" style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 10 }}>
                                             <a
                                                 className="btn btn-ghost"
                                                 href={project.github}
@@ -730,7 +796,7 @@ export default function Home() {
                                             )}
                                             {project.demo === '#' && (
                                                 <span className="btn btn-ghost" style={{ opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none' }}>
-                                                    Demo Soon
+                                                    Demo
                                                 </span>
                                             )}
                                             <Link

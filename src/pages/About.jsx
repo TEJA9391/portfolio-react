@@ -7,12 +7,12 @@ export default function AboutPage() {
                 <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 20 }}>About Me</h1>
 
                 <div className="card" style={{ marginBottom: 20 }}>
-                    <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>Neural Architect & Code Craftsman</h2>
+                    <h2 style={{ fontSize: 20, fontWeight: 600, marginBottom: 12 }}>AI & ML Student | Full-Stack Developer</h2>
                     <p style={{ lineHeight: 1.8, color: 'var(--muted)' }}>
-                        Hey there! I'm <strong style={{ color: 'var(--text)' }}>BOORA RAVITEJA</strong>, an AI/ML Alchemist and Full-Stack Architect passionate about transforming complex problems into elegant, intelligent solutions. As a B.Tech student specializing in <strong style={{ color: 'var(--text)' }}>Artificial Intelligence & Machine Learning</strong>, I'm on a mission to forge the convergence of cutting-edge AI and full-stack development to build next-generation intelligent systems.
+                        I am a passionate B.Tech Computer Science (AI & ML) student with a strong interest in Artificial Intelligence, Machine Learning, Full-Stack Development, and Mobile Application Development. I enjoy designing intelligent, scalable, and user-friendly software solutions that solve real-world problems.
                     </p>
                     <p style={{ lineHeight: 1.8, color: 'var(--muted)', marginTop: 12 }}>
-                        My journey in tech is driven by an insatiable curiosity to explore how machine learning, computer vision, natural language processing, and web technologies can work together to create meaningful impact. I believe in <strong style={{ color: 'var(--text)' }}>learning by building</strong> – every project is an opportunity to push boundaries and discover new possibilities.
+                        With hands-on experience in React, Python, Java, Flutter, SQL, and modern web technologies, I continuously explore new technologies while building impactful projects. My goal is to become a skilled Software Engineer specializing in AI-powered applications and scalable software systems.
                     </p>
                 </div>
 
